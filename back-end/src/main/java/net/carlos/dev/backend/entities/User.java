@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 public class User {
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_persona")
     private Persona persona;
     @Id
     @Column(name = "username", nullable = false, unique = true)
@@ -22,7 +21,7 @@ public class User {
     private String password;
     @OneToOne(cascade = CascadeType.ALL)
     private Role role;
-    @Column(name = "status", nullable = false)
+    @Column(name = "status")
     private String status;
     @Column(name = "apikey", nullable = false)
     private String apikey;

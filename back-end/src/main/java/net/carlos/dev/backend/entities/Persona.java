@@ -3,8 +3,6 @@ package net.carlos.dev.backend.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Entity
 @Data
@@ -39,19 +37,7 @@ public class Persona {
     private String birthdate;
     @Column(name = "age", nullable = false)
     private int age;
-
-    public int calculateAge() {
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-        LocalDate dateBirthDate = LocalDate.parse(this.birthdate, fmt);
-        LocalDate actualDate = LocalDate.now();
-        int theAge = actualDate.getYear() - dateBirthDate.getYear();
-        if (actualDate.getMonthValue() < dateBirthDate.getMonthValue() ||
-                (actualDate.getMonthValue() == dateBirthDate.getMonthValue() && actualDate
-                        .getDayOfMonth() < dateBirthDate.getDayOfMonth())) {
-            theAge--;
-        }
-        return theAge;
-    }
+    @OneToOne(mappedBy = "persona")
+    private User user;
 
 }

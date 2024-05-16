@@ -24,18 +24,19 @@ public class PersonaServiceImpl implements IPersonaServices {
 
 
     @Override
-    public PersonaDTO save(PersonaDTO persona) {
+    public PersonaDTO save(PersonaDTO personaDTO) {
         try {
-            Persona personaEntity = personaMapper.toEntity(persona);
-            if (personaEntity.getIdentification() == null) {
+
+            if (personaDTO.getIdentification() == null) {
                 LOGGER.error("El campo identification es obligatorio");
                 return null;
             }
-            if (personaEntity.getIdentification() == 0){
+            if (personaDTO.getIdentification() == 0){
                 LOGGER.error("No se pudo guardar la persona");
                 return null;
             } else {
-                personaEntity.setAge(personaEntity.calculateAge());
+                personaDTO.setAge(personaDTO.calculateAge());
+                Persona personaEntity = personaMapper.toEntity(personaDTO);
                 Persona personaSaved = personaRepository.save(personaEntity);
                 return personaMapper.toDTO(personaSaved);
             }
@@ -46,18 +47,13 @@ public class PersonaServiceImpl implements IPersonaServices {
     }
 
     @Override
-    public PersonaDTO update(PersonaDTO persona) {
+    public PersonaDTO update(PersonaDTO personaDTO) {
         try {
-            Persona personaEntity = personaMapper.toEntity(persona);
-            if (personaEntity == null || personaEntity.getId() == null) {
+            if (personaDTO == null || personaDTO.getId() == null) {
                 LOGGER.error("Persona no puede ser null");
                 return null;
-            }
-            if (personaEntity == null || personaEntity.getId() == 0){
-                LOGGER.error("No se actualiza la persona");
-                return null;
-            } else {
-                personaEntity.setAge(personaEntity.calculateAge());
+            }else {
+                Persona personaEntity = personaMapper.toEntity(personaDTO);
                 Persona personaSaved = personaRepository.save(personaEntity);
                 return personaMapper.toDTO(personaSaved);
             }

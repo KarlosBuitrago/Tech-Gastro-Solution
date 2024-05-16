@@ -25,6 +25,19 @@ public class PersonaDTO {
     private String country;
     private String birthdate;
     private int age;
+    private String role;
 
+    public int calculateAge() {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+        LocalDate dateBirthDate = LocalDate.parse(this.birthdate, fmt);
+        LocalDate actualDate = LocalDate.now();
+        int theAge = actualDate.getYear() - dateBirthDate.getYear();
+        if (actualDate.getMonthValue() < dateBirthDate.getMonthValue() ||
+                (actualDate.getMonthValue() == dateBirthDate.getMonthValue() && actualDate
+                        .getDayOfMonth() < dateBirthDate.getDayOfMonth())) {
+            theAge--;
+        }
+        return theAge;
+    }
 }

@@ -21,10 +21,10 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         // other configuration options
 //                        .requestMatchers("/authenticate").permitAll()
-//                        .requestMatchers(HttpMethod.OPTIONS, "/**")
+//                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                 .anyRequest().permitAll()
                         // all other requests need to be authenticated
-                        //.anyRequest().authenticated()
+//                        .anyRequest().authenticated()
                 );
                 //.addFilterAfter(UsernamePasswordAuthenticationFilter.class);
         return http.build();
