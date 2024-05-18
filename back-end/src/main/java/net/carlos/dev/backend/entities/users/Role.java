@@ -1,4 +1,4 @@
-package net.carlos.dev.backend.entities;
+package net.carlos.dev.backend.entities.users;
 
 import jakarta.persistence.*;
 import lombok.Data;

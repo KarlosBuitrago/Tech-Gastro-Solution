@@ -1,8 +1,7 @@
-package net.carlos.dev.backend.entities;
+package net.carlos.dev.backend.entities.users;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 public class User {
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "persona_id", referencedColumnName = "id")
     private Persona persona;
     @Id
     @Column(name = "username", nullable = false, unique = true)

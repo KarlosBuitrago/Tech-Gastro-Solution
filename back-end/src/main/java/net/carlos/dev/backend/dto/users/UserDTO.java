@@ -1,7 +1,7 @@
-package net.carlos.dev.backend.dto;
+package net.carlos.dev.backend.dto.users;
 
 import lombok.*;
-import net.carlos.dev.backend.entities.Role;
+import net.carlos.dev.backend.entities.users.Role;
 
 import java.util.Random;
 
