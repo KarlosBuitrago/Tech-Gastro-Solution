@@ -1,7 +1,7 @@
-package net.carlos.dev.backend.mappers;
+package net.carlos.dev.backend.mappers.users;
 
-import net.carlos.dev.backend.dto.PersonaDTO;
-import net.carlos.dev.backend.entities.Persona;
+import net.carlos.dev.backend.dto.users.PersonaDTO;
+import net.carlos.dev.backend.entities.users.Persona;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

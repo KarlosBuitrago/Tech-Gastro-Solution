@@ -1,7 +1,7 @@
-package net.carlos.dev.backend.controllers;
+package net.carlos.dev.backend.controllers.users;
 
-import net.carlos.dev.backend.dto.PersonaDTO;
-import net.carlos.dev.backend.service.impl.UserServiceImpl;
+import net.carlos.dev.backend.dto.users.PersonaDTO;
+import net.carlos.dev.backend.service.impl.users.UserServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -1,10 +1,10 @@
-package net.carlos.dev.backend.service.impl;
+package net.carlos.dev.backend.service.impl.users;
 
-import net.carlos.dev.backend.dto.PersonaDTO;
-import net.carlos.dev.backend.entities.Persona;
-import net.carlos.dev.backend.mappers.PersonaMapper;
-import net.carlos.dev.backend.repositories.PersonaRepository;
-import net.carlos.dev.backend.service.IPersonaServices;
+import net.carlos.dev.backend.dto.users.PersonaDTO;
+import net.carlos.dev.backend.entities.users.Persona;
+import net.carlos.dev.backend.mappers.users.PersonaMapper;
+import net.carlos.dev.backend.repositories.users.PersonaRepository;
+import net.carlos.dev.backend.service.users.IPersonaServices;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;

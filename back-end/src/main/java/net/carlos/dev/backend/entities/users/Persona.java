@@ -1,4 +1,4 @@
-package net.carlos.dev.backend.entities;
+package net.carlos.dev.backend.entities.users;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -37,7 +37,5 @@ public class Persona {
     private String birthdate;
     @Column(name = "age", nullable = false)
     private int age;
-    @OneToOne(mappedBy = "persona")
-    private User user;
 
 }

@@ -1,7 +1,7 @@
-package net.carlos.dev.backend.service;
+package net.carlos.dev.backend.service.users;
 
-import net.carlos.dev.backend.dto.PersonaDTO;
-import net.carlos.dev.backend.dto.UserDTO;
+import net.carlos.dev.backend.dto.users.PersonaDTO;
+import net.carlos.dev.backend.dto.users.UserDTO;
 
 import java.util.List;
 

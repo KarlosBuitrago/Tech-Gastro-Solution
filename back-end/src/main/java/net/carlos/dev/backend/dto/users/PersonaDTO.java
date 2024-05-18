@@ -1,4 +1,4 @@
-package net.carlos.dev.backend.dto;
+package net.carlos.dev.backend.dto.users;
 
 import lombok.*;
 

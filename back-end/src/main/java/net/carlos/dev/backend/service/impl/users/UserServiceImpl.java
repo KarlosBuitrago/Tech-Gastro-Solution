@@ -1,20 +1,19 @@
-package net.carlos.dev.backend.service.impl;
+package net.carlos.dev.backend.service.impl.users;
 
-import net.carlos.dev.backend.dto.PersonaDTO;
-import net.carlos.dev.backend.dto.UserDTO;
-import net.carlos.dev.backend.entities.Persona;
-import net.carlos.dev.backend.entities.Role;
-import net.carlos.dev.backend.entities.User;
-import net.carlos.dev.backend.mappers.PersonaMapper;
-import net.carlos.dev.backend.mappers.UserMapper;
-import net.carlos.dev.backend.repositories.PersonaRepository;
-import net.carlos.dev.backend.repositories.UserRepository;
-import net.carlos.dev.backend.service.IUserService;
-import net.carlos.dev.backend.service.RoleService;
+import net.carlos.dev.backend.dto.users.PersonaDTO;
+import net.carlos.dev.backend.dto.users.UserDTO;
+import net.carlos.dev.backend.entities.users.Persona;
+import net.carlos.dev.backend.entities.users.Role;
+import net.carlos.dev.backend.entities.users.User;
+import net.carlos.dev.backend.mappers.users.PersonaMapper;
+import net.carlos.dev.backend.mappers.users.UserMapper;
+import net.carlos.dev.backend.repositories.users.PersonaRepository;
+import net.carlos.dev.backend.repositories.users.UserRepository;
+import net.carlos.dev.backend.service.users.IUserService;
+import net.carlos.dev.backend.service.users.RoleService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service("IUserService")
 public class UserServiceImpl implements IUserService {
@@ -23,6 +22,7 @@ public class UserServiceImpl implements IUserService {
     private final UserRepository userRepository;
     private final RoleService roleService;
     private final UserMapper userMapper = UserMapper.INSTANCE;
+    private final PersonaMapper personaMapper = PersonaMapper.INSTANCE;
     private final PersonaRepository personaRepository;
     public UserServiceImpl(UserRepository userRepository, RoleService roleService, PersonaRepository personaRepository) {
         this.userRepository = userRepository;
@@ -35,6 +35,9 @@ public class UserServiceImpl implements IUserService {
         if (personaDTO == null) {
             throw new IllegalArgumentException("personaDTO no puede ser nulo");
         }
+        Persona personaEntity = personaMapper.toEntity(personaDTO);
+        personaEntity = personaRepository.save(personaEntity);
+
         UserDTO userDTO = new UserDTO();
         if (userRepository.findByUsername(userDTO.getUsername()) != null) {
             return null;
@@ -47,15 +50,8 @@ public class UserServiceImpl implements IUserService {
             userDTO.createApiKey();
 
             User userEntity = userMapper.toEntity(userDTO);
+            userEntity.setPersona(personaEntity);
 
-            if (personaDTO.getId() != null) { // Asegúrate de que el ID de Persona no sea nulo
-                Optional<Persona> existingPersona = personaRepository.findById(personaDTO.getId());
-                if (existingPersona.isPresent()) {
-                    userEntity.setPersona(existingPersona.get());
-                }else {
-                    throw new IllegalArgumentException("No se encontró la persona con el ID: " + personaDTO.getId());
-                }
-            }
             userEntity = userRepository.save(userEntity);
             return userMapper.toDTO(userEntity);
         }

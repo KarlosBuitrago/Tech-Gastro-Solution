@@ -1,8 +1,8 @@
-package net.carlos.dev.backend.service.impl;
+package net.carlos.dev.backend.service.impl.users;
 
-import net.carlos.dev.backend.entities.Role;
-import net.carlos.dev.backend.repositories.RoleRepository;
-import net.carlos.dev.backend.service.RoleService;
+import net.carlos.dev.backend.entities.users.Role;
+import net.carlos.dev.backend.repositories.users.RoleRepository;
+import net.carlos.dev.backend.service.users.RoleService;
 import org.springframework.stereotype.Service;
 
 @Service("RoleService")

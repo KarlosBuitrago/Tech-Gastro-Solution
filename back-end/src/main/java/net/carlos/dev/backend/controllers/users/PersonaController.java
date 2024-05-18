@@ -1,8 +1,8 @@
-package net.carlos.dev.backend.controllers;
+package net.carlos.dev.backend.controllers.users;
 
-import net.carlos.dev.backend.dto.PersonaDTO;
-import net.carlos.dev.backend.mappers.PersonaMapper;
-import net.carlos.dev.backend.service.impl.PersonaServiceImpl;
+import net.carlos.dev.backend.dto.users.PersonaDTO;
+import net.carlos.dev.backend.mappers.users.PersonaMapper;
+import net.carlos.dev.backend.service.impl.users.PersonaServiceImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +24,9 @@ public class PersonaController {
 
     @PostMapping("/persona")
     public ResponseEntity<?> save(@RequestBody PersonaDTO personaDTO) {
-        PersonaDTO persona = personaService.save(personaDTO);
+        //PersonaDTO persona = personaService.save(personaDTO);
         usuarioController.createUser(personaDTO);
-        return ResponseEntity.ok(persona);
+        return ResponseEntity.ok(personaDTO);
     }
 
 //    @PostMapping("/persona")
