@@ -17,7 +17,7 @@ public class DishesController {
     CategoryDishesController categoryDishesController;
     @PostMapping("/dish")
     public boolean createDishes(@RequestBody DishesDTO dishesDTO){
-        categoryDishesController.createCategoryDishes(dishesDTO);
+        System.out.println(dishesDTO.getName());
         dishesService.createDishes(dishesDTO);
         return true;
     }

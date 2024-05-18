@@ -1,9 +1,13 @@
 package net.carlos.dev.backend.service.impl.dishes;
 
 import net.carlos.dev.backend.dto.dishes.DishesDTO;
+import net.carlos.dev.backend.dto.dishes.PhotoDishesDTO;
 import net.carlos.dev.backend.entities.dishes.CategoryDishes;
 import net.carlos.dev.backend.entities.dishes.Dishes;
+import net.carlos.dev.backend.entities.dishes.PhotoDishes;
+import net.carlos.dev.backend.mappers.dishes.CategoryDishesMapper;
 import net.carlos.dev.backend.mappers.dishes.DishesMapper;
+import net.carlos.dev.backend.mappers.dishes.PhotoDishesMapper;
 import net.carlos.dev.backend.repositories.dishes.CategoryDishesRepository;
 import net.carlos.dev.backend.repositories.dishes.DishesRepository;
 import net.carlos.dev.backend.service.dishes.IDishesService;
@@ -11,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("IDishesService")
 public class DishesServiceImpl implements IDishesService {
@@ -19,34 +24,38 @@ public class DishesServiceImpl implements IDishesService {
 
     @Autowired
     CategorydishesServiceImpl categoryDishes;
+
+    @Autowired
+    CategoryDishesRepository categoryDishesRepository;
+
     DishesMapper dishesMapper = DishesMapper.INSTANCE;
+    CategoryDishesMapper categoryDishesMapper = CategoryDishesMapper.INSTANCE;
+    PhotoDishesMapper photoDishesMapper = PhotoDishesMapper.INSTANCE;
+
 
     @Override
     public boolean createDishes(DishesDTO dishesDTO) {
+        System.out.println(dishesDTO.getName() );
 
-            if (dishesDTO == null) {
-                throw new IllegalArgumentException("dishesDTO no puede ser nulo");
-            }
-            Dishes dishes = dishesMapper.toEntity(dishesDTO);
+        Dishes dishes = dishesMapper.toEntity(dishesDTO);
+        System.out.println(dishes.getDescription());
+        CategoryDishes categoryDishes1 = categoryDishesMapper.toEntity(dishesDTO.getCategoryDishesDTO());
+        System.out.println(categoryDishes1.getName());
+        categoryDishesRepository.save(categoryDishes1);
 
-            if (dishesRepository.findByName(dishesDTO.getName()) != null) {
-                return false;
-            } else {
-                String nameCategory = null;
-                if (dishesDTO.getCategoryDishes() != null) {
-                    nameCategory = dishesDTO.getCategoryDishes().getName();
-                }
-                CategoryDishes categoryDishes1 = null;
-                if (nameCategory != null) {
-                    categoryDishes1 = categoryDishes.createCategoryDishes(nameCategory);
-                }
+        List<PhotoDishes> photoDishes = dishesDTO.getPhotoDishesDTO().stream()
+                .map(photoDishesDTO1 -> photoDishesMapper.toEntity(photoDishesDTO1))
+                .peek(photoDishes1 -> photoDishes1.setDishes(dishes))
+                .collect(Collectors.toList());
 
-                dishes.setCategoryDishes(categoryDishes1);
-                dishesRepository.save(dishes);
-                return true;
-            }
-        }
+        dishes.setCategoryDishes(categoryDishes1);
+        dishes.setPhotoDishes(photoDishes);
 
+        dishesRepository.save(dishes);
+        return true;
+
+
+    }
     
 
     @Override

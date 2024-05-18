@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,5 +18,7 @@ public class CategoryDishes {
     private Long id;
     @Column(name = "nameCategory", nullable = false)
     private String name;
+    @OneToMany(mappedBy = "categoryDishes", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Dishes> dishes;
 
 }

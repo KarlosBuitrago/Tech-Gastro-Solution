@@ -1,6 +1,8 @@
 package net.carlos.dev.backend.service.impl.dishes;
 
+import net.carlos.dev.backend.dto.dishes.CategoryDishesDTO;
 import net.carlos.dev.backend.entities.dishes.CategoryDishes;
+import net.carlos.dev.backend.mappers.dishes.CategoryDishesMapper;
 import net.carlos.dev.backend.repositories.dishes.CategoryDishesRepository;
 import net.carlos.dev.backend.service.dishes.ICategoryDishesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,37 +14,34 @@ public class CategorydishesServiceImpl implements ICategoryDishesService {
 
     @Autowired
     CategoryDishesRepository categoryDishesRepository;
+    CategoryDishesMapper categoryDishesMapper = CategoryDishesMapper.INSTANCE;
 
 
     @Override
-    public CategoryDishes createCategoryDishes(String categoryName) {
-        CategoryDishes categoryDishes = new CategoryDishes();
-        categoryDishes.setName(categoryName);
-        return categoryDishesRepository.save(categoryDishes);
-    }
-
-    @Override
-    public boolean updateCategoryDishes(CategoryDishes categoryDishesDTO) {
-        return false;
+    public boolean updateCategoryDishes(CategoryDishesDTO categoryDishesD) {
+        CategoryDishes categoryDishes = categoryDishesMapper.toEntity(categoryDishesD);
+        categoryDishesRepository.save(categoryDishes);
+        return true;
     }
 
     @Override
     public boolean deleteCategoryDishes(Long id) {
-        return false;
+        categoryDishesRepository.deleteById(id);
+        return true;
     }
 
     @Override
     public CategoryDishes getCategoryDishes(String name) {
-        return null;
+        return categoryDishesRepository.findByName(name);
     }
 
     @Override
     public CategoryDishes findById(Long id) {
-        return null;
+        return categoryDishesRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<CategoryDishes> getAllCategoryDishes() {
-        return List.of();
+        return categoryDishesRepository.findAll();
     }
 }
