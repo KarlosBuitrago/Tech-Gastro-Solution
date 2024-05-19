@@ -2,6 +2,7 @@ package net.carlos.dev.backend.entities.dishes;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import net.carlos.dev.backend.entities.DishesOrders;
 
 import java.util.List;
 
@@ -24,5 +25,8 @@ public class Dishes {
 
     @OneToMany(mappedBy = "dishes" ,cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PhotoDishes> photoDishes;
+
+    @OneToMany(mappedBy = "dishes" ,cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DishesOrders> dishesOrders;
 
 }

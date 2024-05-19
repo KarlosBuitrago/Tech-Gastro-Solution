@@ -15,6 +15,7 @@ public class TablesController {
 
     @PostMapping("/table")
     public TablesDTO save(@RequestBody TablesDTO tablesDTO) {
+        System.out.println(tablesDTO.getDescription());
         return tablesService.save(tablesDTO);
     }
     @PutMapping("/table")

@@ -1,8 +1,10 @@
 package net.carlos.dev.backend.dto.users;
 
 import lombok.*;
+import net.carlos.dev.backend.dto.orders.OrdersDTO;
 import net.carlos.dev.backend.entities.users.Role;
 
+import java.util.List;
 import java.util.Random;
 
 @Data
@@ -16,6 +18,8 @@ public class UserDTO {
     private Role role;
     private String status;
     private String apikey;
+    private List<UsersActivityLogsDTO> usersActivityLogsDTO;
+    private List<OrdersDTO> ordersDTO;
 
     public void createUsername(PersonaDTO personaDTO){
         String first = personaDTO.getFirstName().substring(0, 2);

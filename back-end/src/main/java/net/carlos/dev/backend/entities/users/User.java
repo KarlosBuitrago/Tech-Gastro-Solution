@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.carlos.dev.backend.dto.users.UserDTO;
+import net.carlos.dev.backend.entities.Orders;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -25,5 +29,10 @@ public class User {
     private String status;
     @Column(name = "apikey", nullable = false)
     private String apikey;
+    @OneToMany(mappedBy = "user")
+    private List<UsersActivityLogs> usersActivityLogs;
+    @OneToMany(mappedBy = "user")
+    private List<Orders> orders;
+
 
 }

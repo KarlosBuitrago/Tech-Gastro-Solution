@@ -3,6 +3,8 @@ package net.carlos.dev.backend.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "tables")
@@ -14,4 +16,6 @@ public class Tables {
     private String name;
     @Column(name = "description", nullable = false, length = 2500)
     private String description;
+    @OneToMany(mappedBy = "tables")
+    private List<Orders> orders;
 }
