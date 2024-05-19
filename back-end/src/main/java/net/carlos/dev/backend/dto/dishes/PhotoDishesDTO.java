@@ -8,5 +8,5 @@ import lombok.RequiredArgsConstructor;
 public class PhotoDishesDTO {
     private Long id;
     private String url;
-     private DishesDTO dishesDTO;
+    private DishesDTO dishesDTO;
 }

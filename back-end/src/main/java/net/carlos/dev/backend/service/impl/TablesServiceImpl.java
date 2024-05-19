@@ -29,14 +29,11 @@ public class TablesServiceImpl implements ITablesService {
 
     @Override
     public TablesDTO save(TablesDTO tablesDTO) {
-        if (tablesDTO != null || tablesDTO.getId() != null ){
+        System.out.println(tablesDTO.getDescription());
+        if (tablesDTO != null ){
             Tables tables = tablesMapper.toEntity(tablesDTO);
-            if (tablesRepository.findById(tables.getId()).isEmpty() || tables.getId().equals(tablesDTO.getId())){
-                return null;
-            }else {
-                tablesRepository.save(tables);
-                return tablesMapper.toDTO(tables);
-            }
+            tablesRepository.save(tables);
+            return tablesMapper.toDTO(tables);
 
         }
         return null;

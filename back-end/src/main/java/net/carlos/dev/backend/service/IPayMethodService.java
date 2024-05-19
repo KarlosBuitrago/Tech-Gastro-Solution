@@ -1,14 +1,14 @@
 package net.carlos.dev.backend.service;
 
-import net.carlos.dev.backend.dto.PayMethodDTO;
+import net.carlos.dev.backend.dto.payment.PaymentMethodDTO;
 
 import java.util.List;
 
 public interface IPayMethodService {
-    boolean savePayMethod(PayMethodDTO payMethodDTO);
-    boolean updatePayMethod(PayMethodDTO payMethodDTO);
+    boolean savePayMethod(PaymentMethodDTO paymentMethodDTO);
+    boolean updatePayMethod(PaymentMethodDTO paymentMethodDTO);
     boolean deletePayMethod(Long id);
-    PayMethodDTO getPayMethodById(Long id);
-    List<PayMethodDTO> getAllPayMethods();
-    PayMethodDTO getPayMethodByName(String name);
+    PaymentMethodDTO getPayMethodById(Long id);
+    List<PaymentMethodDTO> getAllPayMethods();
+    PaymentMethodDTO getPayMethodByName(String name);
 }

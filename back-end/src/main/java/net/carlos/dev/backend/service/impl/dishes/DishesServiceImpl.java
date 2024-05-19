@@ -35,12 +35,9 @@ public class DishesServiceImpl implements IDishesService {
 
     @Override
     public boolean createDishes(DishesDTO dishesDTO) {
-        System.out.println(dishesDTO.getName() );
 
         Dishes dishes = dishesMapper.toEntity(dishesDTO);
-        System.out.println(dishes.getDescription());
         CategoryDishes categoryDishes1 = categoryDishesMapper.toEntity(dishesDTO.getCategoryDishesDTO());
-        System.out.println(categoryDishes1.getName());
         categoryDishesRepository.save(categoryDishes1);
 
         List<PhotoDishes> photoDishes = dishesDTO.getPhotoDishesDTO().stream()
