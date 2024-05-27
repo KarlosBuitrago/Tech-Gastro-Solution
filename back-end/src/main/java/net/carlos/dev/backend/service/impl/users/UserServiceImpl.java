@@ -11,8 +11,11 @@ import net.carlos.dev.backend.repositories.users.PersonaRepository;
 import net.carlos.dev.backend.repositories.users.UserRepository;
 import net.carlos.dev.backend.service.users.IUserService;
 import net.carlos.dev.backend.service.users.RoleService;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("IUserService")
@@ -55,8 +58,6 @@ public class UserServiceImpl implements IUserService {
             userEntity = userRepository.save(userEntity);
             return userMapper.toDTO(userEntity);
         }
-
-
     }
 
     @Override
@@ -85,5 +86,22 @@ public class UserServiceImpl implements IUserService {
 
     public User convertToEntity(UserDTO userDTO){
         return userMapper.toEntity(userDTO);
+    }
+
+    public boolean activateUser(Long id, String status){
+        User user = userRepository.findByPersonaId(id);
+        user.setStatus(status);
+        user = userRepository.save(user);
+        return true;
+    }
+
+    public UserDetails loadUserByUsername(String username, String password){
+
+        User appUser = userRepository.findByUsernamePassword(username, password);
+
+        List<GrantedAuthority> granList = new ArrayList<>();
+
+        UserDetails user = new org.springframework.security.core.userdetails.User(appUser.getUsername(), appUser.getPassword(), granList);
+        return user;
     }
 }

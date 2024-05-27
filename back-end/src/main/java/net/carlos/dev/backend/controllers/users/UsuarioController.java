@@ -2,6 +2,7 @@ package net.carlos.dev.backend.controllers.users;
 
 import net.carlos.dev.backend.dto.users.PersonaDTO;
 import net.carlos.dev.backend.service.impl.users.UserServiceImpl;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,5 +18,14 @@ public class UsuarioController {
 
     void createUser(PersonaDTO persona) {
         userService.save(persona);
+    }
+
+    void updateUser(PersonaDTO persona) {
+        userService.save(persona);
+    }
+    @PostMapping("/activate")
+    public boolean activateUser(Long id, String status) {
+        userService.activateUser(id, status);
+        return true;
     }
 }
