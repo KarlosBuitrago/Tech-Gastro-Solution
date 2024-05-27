@@ -1,4 +1,4 @@
-package net.carlos.dev.backend.controllers;
+package net.carlos.dev.backend.controllers.orders;
 
 import net.carlos.dev.backend.dto.payment.PaymentMethodDTO;
 import net.carlos.dev.backend.service.impl.PaymentMethodServiceImpl;
