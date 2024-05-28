@@ -1,10 +1,10 @@
-package net.carlos.dev.backend.service.impl;
+package net.carlos.dev.backend.service.impl.orders;
 
 import net.carlos.dev.backend.dto.orders.OrdersDTO;
 import net.carlos.dev.backend.dto.TablesDTO;
 import net.carlos.dev.backend.entities.Orders;
 import net.carlos.dev.backend.entities.users.User;
-import net.carlos.dev.backend.mappers.OrdersMapper;
+import net.carlos.dev.backend.mappers.orders.OrdersMapper;
 import net.carlos.dev.backend.mappers.TablesMapper;
 import net.carlos.dev.backend.mappers.users.PersonaMapper;
 import net.carlos.dev.backend.mappers.users.UserMapper;
@@ -12,7 +12,7 @@ import net.carlos.dev.backend.repositories.OrdersRepository;
 import net.carlos.dev.backend.repositories.TablesRepository;
 import net.carlos.dev.backend.repositories.users.PersonaRepository;
 import net.carlos.dev.backend.repositories.users.UserRepository;
-import net.carlos.dev.backend.service.IOrdersService;
+import net.carlos.dev.backend.service.orders.IOrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

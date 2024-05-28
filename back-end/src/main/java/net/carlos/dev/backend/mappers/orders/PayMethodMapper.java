@@ -1,4 +1,4 @@
-package net.carlos.dev.backend.mappers;
+package net.carlos.dev.backend.mappers.orders;
 
 import net.carlos.dev.backend.dto.payment.PaymentMethodDTO;
 import net.carlos.dev.backend.entities.PaymentMethod;

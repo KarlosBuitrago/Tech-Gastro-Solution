@@ -37,5 +37,9 @@ public class Persona {
     private String birthdate;
     @Column(name = "age", nullable = false)
     private int age;
+    private String role;
+
+    @OneToOne(mappedBy = "persona")
+    private User user;
 
 }

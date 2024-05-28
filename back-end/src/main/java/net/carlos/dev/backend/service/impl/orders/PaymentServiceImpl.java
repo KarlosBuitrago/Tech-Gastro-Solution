@@ -1,14 +1,14 @@
-package net.carlos.dev.backend.service.impl;
+package net.carlos.dev.backend.service.impl.orders;
 
 import net.carlos.dev.backend.dto.orders.OrdersDTO;
 import net.carlos.dev.backend.dto.payment.PaymentDTO;
 import net.carlos.dev.backend.entities.Payment;
-import net.carlos.dev.backend.mappers.OrdersMapper;
-import net.carlos.dev.backend.mappers.PaymentMapper;
+import net.carlos.dev.backend.mappers.orders.OrdersMapper;
+import net.carlos.dev.backend.mappers.orders.PaymentMapper;
 import net.carlos.dev.backend.repositories.OrdersRepository;
 import net.carlos.dev.backend.repositories.PaymentMethodRepository;
 import net.carlos.dev.backend.repositories.PaymentRepository;
-import net.carlos.dev.backend.service.IPaymentService;
+import net.carlos.dev.backend.service.orders.IPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

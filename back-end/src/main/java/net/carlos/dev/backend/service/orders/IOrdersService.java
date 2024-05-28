@@ -1,4 +1,4 @@
-package net.carlos.dev.backend.service;
+package net.carlos.dev.backend.service.orders;
 
 import net.carlos.dev.backend.dto.orders.OrdersDTO;
 

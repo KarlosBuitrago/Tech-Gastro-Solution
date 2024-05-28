@@ -11,4 +11,6 @@ public interface UserRepository extends JpaRepository<User, PersonaDTO> {
     @Query("SELECT u FROM User u WHERE u.username = ?1 AND u.password = ?2")
     public abstract User findByUsernamePassword(String username, String password);
     public abstract User findByPersonaId(Long id);
+
+    int deleteByPersonaId(Long id);
 }

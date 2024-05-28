@@ -47,15 +47,25 @@ public class JwtAuthenticationController {
 	public ResponseEntity<?> createAuthenticationToken (@RequestBody JwtRequest authenticationRequest) throws Exception {
 		System.out.println("*****************************************************************************");
 		System.out.println("authenticationRequest.getUsername():["+authenticationRequest.getUsername()+"]");
-		System.out.println("authenticationRequest.getPassword():["+authenticationRequest.getPassword()+"]");
 		System.out.println("*****************************************************************************");
-		final UserDetails userDetails = userServiceImpl
-				.loadUserByUsername(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-		final String token = jwtAuthtenticationConfig.getJWTToken(userDetails.getUsername());
-		System.out.println("*****************************************************************************");
-		System.out.println("token: ["+token+"]");
-		System.out.println("*****************************************************************************");
-		return ResponseEntity.ok(new JwtResponse(token));
+		if (authenticationRequest.getUsername() == null || authenticationRequest.getPassword() == null) {
+			throw new Exception("Please provide a username and password");
+		}
+		UserDetails userDetails = null;
+
+		if (userDetails == null) {
+			return ResponseEntity.ok("User not found or inactive");
+		} else {
+			userDetails = userServiceImpl
+					.loadUserByUsername(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+			final String token = jwtAuthtenticationConfig.getJWTToken(userDetails.getUsername()+"-"+userDetails.getPassword());
+			System.out.println("*****************************************************************************");
+			System.out.println("token: ["+token+"]");
+			System.out.println("*****************************************************************************");
+			return ResponseEntity.ok(new JwtResponse(token));
+		}
+
+
 	
 	}
 		

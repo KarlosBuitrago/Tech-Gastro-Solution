@@ -1,14 +1,14 @@
 package net.carlos.dev.backend.controllers.orders;
 
 import net.carlos.dev.backend.dto.orders.DishesOrdersDTO;
-import net.carlos.dev.backend.service.impl.DishesOrdersServiceImpl;
+import net.carlos.dev.backend.service.impl.orders.DishesOrdersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("gastro-tech/api/v1")
+@RequestMapping("gastro-tech/api/v1/orders")
 public class DishesOrdersController {
     @Autowired
     private DishesOrdersServiceImpl dishesOrdersService;

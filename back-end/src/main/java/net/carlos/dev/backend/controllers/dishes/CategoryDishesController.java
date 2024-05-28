@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("gastro-tech/api/v1")
+@RequestMapping("gastro-tech/api/v1/dishes")
 public class CategoryDishesController {
     @Autowired
     CategorydishesServiceImpl categorydishesService;

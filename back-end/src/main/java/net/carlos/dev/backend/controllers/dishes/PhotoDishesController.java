@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("gastro-tech/api/v1")
+@RequestMapping("gastro-tech/api/v1/dishes")
 public class PhotoDishesController {
 
     @Autowired

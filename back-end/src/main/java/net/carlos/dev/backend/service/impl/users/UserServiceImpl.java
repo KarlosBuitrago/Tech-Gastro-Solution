@@ -11,6 +11,8 @@ import net.carlos.dev.backend.repositories.users.PersonaRepository;
 import net.carlos.dev.backend.repositories.users.UserRepository;
 import net.carlos.dev.backend.service.users.IUserService;
 import net.carlos.dev.backend.service.users.RoleService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ import java.util.List;
 @Service("IUserService")
 public class UserServiceImpl implements IUserService {
 
+    private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
     private final RoleService roleService;
@@ -45,7 +48,6 @@ public class UserServiceImpl implements IUserService {
         if (userRepository.findByUsername(userDTO.getUsername()) != null) {
             return null;
         }else {
-
             Role role = roleService.createRole(personaDTO.getRole());
             userDTO.setRole(role);
             userDTO.createUsername(personaDTO);
@@ -67,7 +69,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return  userRepository.deleteByPersonaId(id) > 0;
+
     }
 
     @Override
@@ -77,31 +80,34 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserDTO findByIdPersona(Long idPersona) {
-        return null;
-    }
-
-    public UserDTO convertToDTO(User user){
+        User user = userRepository.findByPersonaId(idPersona);
         return userMapper.toDTO(user);
     }
 
-    public User convertToEntity(UserDTO userDTO){
-        return userMapper.toEntity(userDTO);
-    }
-
     public boolean activateUser(Long id, String status){
+        System.out.println(status);
         User user = userRepository.findByPersonaId(id);
-        user.setStatus(status);
-        user = userRepository.save(user);
-        return true;
+        if (user.getStatus() == null){
+            return false;
+        }else {
+            user.setStatus(status);
+            System.out.println(user.getStatus());
+            userRepository.save(user);
+            return true;
+        }
+
     }
 
     public UserDetails loadUserByUsername(String username, String password){
-
         User appUser = userRepository.findByUsernamePassword(username, password);
-
         List<GrantedAuthority> granList = new ArrayList<>();
-
-        UserDetails user = new org.springframework.security.core.userdetails.User(appUser.getUsername(), appUser.getPassword(), granList);
+        UserDetails user = null;
+        if (appUser.getStatus().equalsIgnoreCase("Activo")){
+            user = new org.springframework.security.core.userdetails.User(appUser.getUsername(), appUser.getPassword(), granList);
+        }else {
+            LOGGER.error("Usuario no activo");
+            return null;
+        }
         return user;
     }
 }

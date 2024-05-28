@@ -1,7 +1,7 @@
 package net.carlos.dev.backend.controllers.orders;
 
 import net.carlos.dev.backend.dto.orders.OrdersDTO;
-import net.carlos.dev.backend.service.impl.IOrdersServiceImpl;
+import net.carlos.dev.backend.service.impl.orders.IOrdersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("gastro-tech/api/v1")
+@RequestMapping("gastro-tech/api/v1/orders")
 public class OrdersController {
 
     @Autowired
