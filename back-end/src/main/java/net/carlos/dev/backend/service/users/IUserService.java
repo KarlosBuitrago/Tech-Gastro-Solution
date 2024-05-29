@@ -13,4 +13,6 @@ public interface IUserService {
     public List<UserDTO> findAll();
     public UserDTO findByIdPersona(Long idPersona);
     UserDetails loadUserByUsername(String username, String password);
+
+    void changePassword(String username, String password);
 }

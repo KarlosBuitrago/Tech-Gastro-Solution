@@ -25,13 +25,14 @@ class WebSecurityConfig{
 				.csrf(AbstractHttpConfigurer::disable)
 					.authorizeHttpRequests(authz -> authz
 					.requestMatchers(Constants.LOGIN_URL).permitAll()
+							.requestMatchers("/changePassword").permitAll()
 					.requestMatchers( "/api-docs/**").permitAll()
 					.requestMatchers("/swagger-ui/**").permitAll()
 					.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-					 .anyRequest().permitAll());
+//					 .anyRequest().permitAll());
 					// all other requests need to be authenticated
-//					.anyRequest().authenticated())
-//					.addFilterAfter(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+					.anyRequest().authenticated())
+					.addFilterAfter(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
 		
 		return http.build();
 	}

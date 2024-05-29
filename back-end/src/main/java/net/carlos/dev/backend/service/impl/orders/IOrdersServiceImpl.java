@@ -4,7 +4,7 @@ import net.carlos.dev.backend.dto.orders.OrdersDTO;
 import net.carlos.dev.backend.dto.TablesDTO;
 import net.carlos.dev.backend.entities.Orders;
 import net.carlos.dev.backend.entities.users.User;
-import net.carlos.dev.backend.mappers.orders.OrdersMapper;
+import net.carlos.dev.backend.mappers.OrdersMapper;
 import net.carlos.dev.backend.mappers.TablesMapper;
 import net.carlos.dev.backend.mappers.users.PersonaMapper;
 import net.carlos.dev.backend.mappers.users.UserMapper;

@@ -15,11 +15,11 @@ public class PersonaController {
     @Qualifier("IPersonaServices")
     private final PersonaServiceImpl personaService;
 
-    private final UsuarioController usuarioController;
+    private final UserController usuarioController;
 
     private final PersonaMapper personaMapper = PersonaMapper.INSTANCE;
 
-    public PersonaController(PersonaServiceImpl personaService, UsuarioController usuarioController) {
+    public PersonaController(PersonaServiceImpl personaService, UserController usuarioController) {
         this.personaService = personaService;
         this.usuarioController = usuarioController;
     }
