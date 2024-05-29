@@ -10,11 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -51,22 +47,25 @@ public class JwtAuthenticationController {
 		if (authenticationRequest.getUsername() == null || authenticationRequest.getPassword() == null) {
 			throw new Exception("Please provide a username and password");
 		}
-		UserDetails userDetails = null;
+
+		UserDetails userDetails = userServiceImpl
+				.loadUserByUsername(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+
 
 		if (userDetails == null) {
 			return ResponseEntity.ok("User not found or inactive");
 		} else {
-			userDetails = userServiceImpl
-					.loadUserByUsername(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 			final String token = jwtAuthtenticationConfig.getJWTToken(userDetails.getUsername()+"-"+userDetails.getPassword());
 			System.out.println("*****************************************************************************");
 			System.out.println("token: ["+token+"]");
 			System.out.println("*****************************************************************************");
 			return ResponseEntity.ok(new JwtResponse(token));
 		}
-
-
-	
+	}
+	@PostMapping("/changePassword")
+	public ResponseEntity<?> changePassword(@RequestBody JwtRequest jwtRequest) {
+		userServiceImpl.changePassword(jwtRequest.getUsername(), jwtRequest.getPassword());
+		return ResponseEntity.ok("Password changed successfully");
 	}
 		
 }

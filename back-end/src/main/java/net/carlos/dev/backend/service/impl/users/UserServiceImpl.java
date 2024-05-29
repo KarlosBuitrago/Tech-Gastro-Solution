@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class UserServiceImpl implements IUserService {
     private final UserMapper userMapper = UserMapper.INSTANCE;
     private final PersonaMapper personaMapper = PersonaMapper.INSTANCE;
     private final PersonaRepository personaRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
     public UserServiceImpl(UserRepository userRepository, RoleService roleService, PersonaRepository personaRepository) {
         this.userRepository = userRepository;
         this.roleService = roleService;
@@ -52,6 +54,7 @@ public class UserServiceImpl implements IUserService {
             userDTO.setRole(role);
             userDTO.createUsername(personaDTO);
             userDTO.createPassword(personaDTO);
+            userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
             userDTO.createApiKey();
 
             User userEntity = userMapper.toEntity(userDTO);
@@ -99,15 +102,29 @@ public class UserServiceImpl implements IUserService {
     }
 
     public UserDetails loadUserByUsername(String username, String password){
-        User appUser = userRepository.findByUsernamePassword(username, password);
+        System.out.println(username +"     "+ password);
+        User appUser = userRepository.findByUsername(username);
+        System.out.println(appUser.getUsername());
         List<GrantedAuthority> granList = new ArrayList<>();
         UserDetails user = null;
-        if (appUser.getStatus().equalsIgnoreCase("Activo")){
+        if (appUser.getStatus().equalsIgnoreCase("Activo") && bCryptPasswordEncoder.matches(password, appUser.getPassword())){
             user = new org.springframework.security.core.userdetails.User(appUser.getUsername(), appUser.getPassword(), granList);
         }else {
             LOGGER.error("Usuario no activo");
             return null;
         }
         return user;
+    }
+
+    @Override
+    public void changePassword(String username, String password) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new IllegalArgumentException("Usuario no encontrado");
+        }else {
+            user.setPassword(bCryptPasswordEncoder.encode(password));
+            userRepository.save(user);
+        }
+
     }
 }

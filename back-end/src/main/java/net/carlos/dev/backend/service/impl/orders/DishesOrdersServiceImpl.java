@@ -2,7 +2,7 @@ package net.carlos.dev.backend.service.impl.orders;
 
 import net.carlos.dev.backend.dto.orders.DishesOrdersDTO;
 import net.carlos.dev.backend.entities.DishesOrders;
-import net.carlos.dev.backend.mappers.orders.DishesOrdersMapper;
+import net.carlos.dev.backend.mappers.DishesOrdersMapper;
 import net.carlos.dev.backend.repositories.DishesOrdersRepository;
 import net.carlos.dev.backend.repositories.OrdersRepository;
 import net.carlos.dev.backend.repositories.dishes.DishesRepository;
