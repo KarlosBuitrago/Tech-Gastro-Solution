@@ -44,7 +44,7 @@ session_destroy();
                 </div>
                 <div class="mt-3">
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" >INICIA SESIÓN</button>
-                </div>
+                  <!-- <a type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="pages/home.php">INICIA SESIÓN</a>                </div> -->
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">                    
                   </div>
