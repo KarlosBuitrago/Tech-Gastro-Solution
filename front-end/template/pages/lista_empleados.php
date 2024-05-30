@@ -1,3 +1,64 @@
+<?php
+
+session_start();
+
+
+
+if (!isset($_SESSION['jwttoken'])) {
+  header('Location: ../index.php');
+  exit();
+}
+
+$token = $_SESSION['jwttoken'];
+echo $token;
+
+$curl = curl_init();
+
+curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/gastro-tech/api/v1/users/personasUsers");
+
+curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
+
+curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+  "Authorization:" . $token,
+  "Content-Type: application/json"
+));
+
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+//$response = curl_exec($curl);
+
+if (curl_errno($curl)) {
+  echo "Curl error: " . curl_error($curl) . "\n";
+  curl_close($curl);
+  exit;
+}
+
+$response = curl_exec($curl);
+
+$httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+echo $httpCode;
+curl_close($curl);
+
+if ($response === null || $response === '') {
+  echo "Error: La respuesta está vacía.\n";
+  exit;
+}
+
+$responseData = json_decode($response, true);
+
+if ($httpCode >= 400) {
+    $responseData = array('error' => 'Error del servidor.');
+}
+
+if (!is_array($responseData)) {
+  echo "Error: Invalid JSON response from API.\n";
+  exit;
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,9 +84,8 @@
               <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Bordered table</h4>
+                  <h4 class="card-title">Lista de Empleados</h4>
                   <p class="card-description">
-                    Add class <code>.table-bordered</code>
                   </p>
                   <div class="table-responsive pt-3">
                     <table class="table table-bordered">
@@ -35,156 +95,100 @@
                             #
                           </th>
                           <th>
-                            First name
+                            Tipo de Identificacion
                           </th>
                           <th>
-                            Progress
+                            Identificacion
                           </th>
                           <th>
-                            Amount
+                            Primer Nombre
                           </th>
                           <th>
-                            Deadline
+                            Segundo Nombre
+                          </th>
+                          <th>
+                            primer Apellido
+                          </th>
+                          <th>
+                            Segundo Apellido
+                          </th>
+                          <th>
+                            Correo
+                          </th>
+                          <th>
+                            Telefono
+                          </th>
+                          <th>
+                            Direccion
+                          </th>
+                          <th>
+                            Ciudad
+                          </th>
+                          <th>
+                            Pais
+                          </th>
+                          <th>
+                            Fecha de Nacimiento
+                          </th>
+                          <th>
+                            Edad
+                          </th>
+                          <th>
+                            Usuario
+                          </th>
+                          <th>
+                            Rol
+                          </th>
+                          <th>
+                            Estado
+                          </th>
+                          <th>
+                            Editar
+                          </th>
+                          <th>
+                            Eliminar
                           </th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>
-                            1
-                          </td>
-                          <td>
-                            Herman Beck
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 77.99
-                          </td>
-                          <td>
-                            May 15, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            2
-                          </td>
-                          <td>
-                            Messsy Adam
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $245.30
-                          </td>
-                          <td>
-                            July 1, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            3
-                          </td>
-                          <td>
-                            John Richards
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $138.00
-                          </td>
-                          <td>
-                            Apr 12, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            4
-                          </td>
-                          <td>
-                            Peter Meggik
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 77.99
-                          </td>
-                          <td>
-                            May 15, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            5
-                          </td>
-                          <td>
-                            Edward
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 160.25
-                          </td>
-                          <td>
-                            May 03, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            6
-                          </td>
-                          <td>
-                            John Doe
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 123.21
-                          </td>
-                          <td>
-                            April 05, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            7
-                          </td>
-                          <td>
-                            Henry Tom
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 150.00
-                          </td>
-                          <td>
-                            June 16, 2015
-                          </td>
-                        </tr>
+                      <?php
+                        if (is_array($responseData)){
+                            foreach ($responseData as $empleado) {
+                                if (is_array($empleado)) {
+                                    echo "<tr>";
+                                    echo "<td>{$empleado['id']}</td>";
+                                    echo "<td>{$empleado['typeIdentification']}</td>";
+                                    echo "<td>{$empleado['identification']}</td>";
+                                    echo "<td>{$empleado['firstName']}</td>";
+                                    echo "<td>{$empleado['middleName']}</td>";
+                                    echo "<td>{$empleado['secondLastName']}</td>";
+                                    echo "<td>{$empleado['email']}</td>";
+                                    echo "<td>{$empleado['phone']}</td>";
+                                    echo "<td>{$empleado['address']}</td>";
+                                    echo "<td>{$empleado['city']}</td>";
+                                    echo "<td>{$empleado['country']}</td>";
+                                    echo "<td>{$empleado['birthdate']}</td>";
+                                    echo "<td>{$empleado['age']}</td>";
+                                    echo "<td>{$empleado['username']}</td>";
+                                    echo "<td>{$empleado['role']}</td>";
+                                    echo "<td>{$empleado['status']}</td>"; 
+                                    echo "<td><a href='edit_persona.php?id={$empleado['id']}' class='btn btn-warning btn-sm'>Editar <i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>";
+                                    echo "<td><a href='list_persona.php?id={$empleado['id']}' class='btn btn-danger btn-sm'> Borrar<i class='fa fa-trash-o' aria-hidden='true'></i></a></td>";
+                                    echo "</tr>";
+                                }else{
+                                  echo "No llega un array, llego una cadena ";                        
+                                
+                                }
+                            }  
+                          } else {
+                              echo "<tr><td colspan='10'>No hay personas registradas.</td></tr>";
+                          }
+                        ?>
                       </tbody>
                     </table>
                   </div>
+                  <a href="registrar_empleado.php" class="btn btn-success ">Agregar Empleado <i class="fa fa-plus-square" aria-hidden="true"></i></a>
+                    <a href="home.php" class="btn btn-primary ">Go to Home</a>
                 </div>
               </div>
             </div>

@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['jwttoken'])) {
+    header('Location: ../index.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <?php include 'partials/header.php'; ?>
@@ -536,7 +544,7 @@
           </div>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
-<?php include 'partials/footer.php'; ?>
+          <?php include 'partials/footer.php'; ?>
 
           <!-- partial -->
         </div>

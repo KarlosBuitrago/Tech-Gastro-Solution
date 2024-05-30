@@ -14,7 +14,7 @@
         </a>
       </li>
       <li class="nav-item  d-none d-lg-flex">
-        <a class="nav-link active" href="#">
+        <a class="nav-link active" href="home.php">
           Statistic
         </a>
       </li>
@@ -128,11 +128,7 @@
           <i class="typcn typcn-user-outline mr-0"></i>
           <span class="nav-profile-name">Evan Morales</span>
         </a>
-        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-            <a class="dropdown-item" href="index.php">
-              <i class="typcn typcn-user-add-outline menu-icon"></i>
-                  Iniciar sesión
-          </a>
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">            
           <a class="dropdown-item" href="pages/samples/register.html">
           <i class="typcn typcn-user-add-outline menu-icon"></i>
           Registrarse
@@ -141,7 +137,7 @@
           <i class="typcn typcn-cog text-primary"></i>
           Configuración
           </a>
-          <a class="dropdown-item">
+          <a class="dropdown-item" href="../index.php">
           <i class="typcn typcn-power text-primary"></i>
           Cerrar sesión
           </a>
