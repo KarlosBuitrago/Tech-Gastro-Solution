@@ -36,38 +36,39 @@
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
         <i class="typcn typcn-briefcase menu-icon"></i>
-        <span class="menu-title">UI Elements</span>
+        <span class="menu-title">Platos</span>
         <i class="typcn typcn-chevron-right menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+          <li class="nav-item"> <a class="nav-link" href="lista_platos.php">Platos</a></li>
+          <li class="nav-item"> <a class="nav-link" href="crear_plato.php">Crear plato</a></li>
+          <li class="nav-item"> <a class="nav-link" href="categoria_plato.php">Categoria plato</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
         <i class="typcn typcn-film menu-icon"></i>
-        <span class="menu-title">Form elements</span>
+        <span class="menu-title">mesas</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="form-elements">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Basic Elements</a></li>
+          <li class="nav-item"><a class="nav-link" href="registrar_mesas.php">Crear mesa</a></li>
+          <li class="nav-item"><a class="nav-link" href="lista_mesas.php">listar mesas</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
         <i class="typcn typcn-chart-pie-outline menu-icon"></i>
-        <span class="menu-title">Charts</span>
+        <span class="menu-title">Pagos</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="charts">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
+          <li class="nav-item"> <a class="nav-link" href="registrar_metodo_pago.php">Crear metodo de pago</a></li>
         </ul>
       </div>
     </li>

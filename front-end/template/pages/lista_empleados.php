@@ -172,8 +172,8 @@ if (!is_array($responseData)) {
                                     echo "<td>{$empleado['username']}</td>";
                                     echo "<td>{$empleado['role']}</td>";
                                     echo "<td>{$empleado['status']}</td>"; 
-                                    echo "<td><a href='edit_persona.php?id={$empleado['id']}' class='btn btn-warning btn-sm'>Editar <i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>";
-                                    echo "<td><a href='list_persona.php?id={$empleado['id']}' class='btn btn-danger btn-sm'> Borrar<i class='fa fa-trash-o' aria-hidden='true'></i></a></td>";
+                                    echo "<td><a href='actualizar_empleado.php?id={$empleado['id']}' class='btn btn-warning btn-sm'>Editar <i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>";
+                                    echo "<td><a href='../php/eliminar_empleado.php?id={$empleado['id']}' class='btn btn-danger btn-sm'> Borrar<i class='fa fa-trash-o' aria-hidden='true'></i></a></td>";
                                     echo "</tr>";
                                 }else{
                                   echo "No llega un array, llego una cadena ";                        
@@ -188,7 +188,7 @@ if (!is_array($responseData)) {
                     </table>
                   </div>
                   <a href="registrar_empleado.php" class="btn btn-success ">Agregar Empleado <i class="fa fa-plus-square" aria-hidden="true"></i></a>
-                    <a href="home.php" class="btn btn-primary ">Go to Home</a>
+                    <a href="home.php" class="btn btn-primary ">Activar Empleado</a>
                 </div>
               </div>
             </div>

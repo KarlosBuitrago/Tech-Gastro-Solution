@@ -48,7 +48,7 @@ session_destroy();
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">                    
                   </div>
-                  <a href="#" class="auth-link text-black">¿Olvidó su contraseña?</a>                
+                  <a href="pages/cambiar_contraseña.php" class="auth-link text-black">¿Olvidó su contraseña?</a>                
               </form>
             </div>
           </div>
