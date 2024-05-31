@@ -7,6 +7,7 @@ import net.carlos.dev.backend.entities.dishes.CategoryDishes;
 import java.util.List;
 
 public interface ICategoryDishesService {
+    CategoryDishesDTO createCategoryDishes(CategoryDishesDTO categoryDishes);
     boolean updateCategoryDishes(CategoryDishesDTO categoryDishes);
     boolean deleteCategoryDishes(Long id);
     CategoryDishes getCategoryDishes(String name);

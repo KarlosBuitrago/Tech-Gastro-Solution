@@ -18,7 +18,7 @@ public class CategoryDishes {
     private Long id;
     @Column(name = "nameCategory", nullable = false)
     private String name;
-    @OneToMany(mappedBy = "categoryDishes", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "categoryDishes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Dishes> dishes;
 
 }

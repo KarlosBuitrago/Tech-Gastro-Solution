@@ -11,5 +11,4 @@ import java.util.List;
 public class CategoryDishesDTO {
     private Long id;
     private String name;
-    private List<DishesDTO> dishesDTO;
 }
