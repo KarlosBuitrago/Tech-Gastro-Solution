@@ -22,7 +22,7 @@ public class DishesController {
         return true;
     }
 
-    @PutMapping("/dish")
+    @PutMapping("/dish/update")
     public boolean updateDishes(@RequestBody DishesDTO dishesDTO){
         dishesService.updateDishes(dishesDTO);
         return true;

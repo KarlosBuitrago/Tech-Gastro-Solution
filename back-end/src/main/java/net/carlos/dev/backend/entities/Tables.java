@@ -16,6 +16,6 @@ public class Tables {
     private String name;
     @Column(name = "description", nullable = false, length = 2500)
     private String description;
-    @OneToMany(mappedBy = "tables")
+    @OneToMany(mappedBy = "tables", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Orders> orders;
 }

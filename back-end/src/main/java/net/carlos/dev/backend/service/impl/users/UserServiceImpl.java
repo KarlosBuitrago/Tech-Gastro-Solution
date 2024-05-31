@@ -72,7 +72,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public boolean delete(Long id) {
-        return  userRepository.deleteByPersonaId(id) > 0;
+        return  userRepository.deleteByPersonaId(personaRepository.findById(id).get().getId()) > 0;
 
     }
 

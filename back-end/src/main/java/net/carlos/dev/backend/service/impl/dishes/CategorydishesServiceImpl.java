@@ -18,6 +18,13 @@ public class CategorydishesServiceImpl implements ICategoryDishesService {
 
 
     @Override
+    public CategoryDishesDTO createCategoryDishes(CategoryDishesDTO categoryDishesDTO) {
+        CategoryDishes categoryDishes = categoryDishesMapper.toEntity(categoryDishesDTO);
+        categoryDishesRepository.save(categoryDishes);
+        return categoryDishesDTO;
+    }
+
+    @Override
     public boolean updateCategoryDishes(CategoryDishesDTO categoryDishesD) {
         CategoryDishes categoryDishes = categoryDishesMapper.toEntity(categoryDishesD);
         categoryDishesRepository.save(categoryDishes);

@@ -12,5 +12,4 @@ public class TablesDTO {
     private Long id;
     private String name;
     private String description;
-    private List<OrdersDTO> ordersDTO;
 }

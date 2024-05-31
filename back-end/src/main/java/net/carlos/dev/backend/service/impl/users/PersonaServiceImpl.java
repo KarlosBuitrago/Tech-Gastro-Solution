@@ -7,10 +7,12 @@ import net.carlos.dev.backend.entities.users.User;
 import net.carlos.dev.backend.mappers.users.PersonaMapper;
 import net.carlos.dev.backend.mappers.users.PersonaUserMapper;
 import net.carlos.dev.backend.repositories.users.PersonaRepository;
+import net.carlos.dev.backend.repositories.users.UserRepository;
 import net.carlos.dev.backend.service.users.IPersonaServices;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,11 +24,13 @@ public class PersonaServiceImpl implements IPersonaServices {
     private static final Logger LOGGER = LogManager.getLogger(PersonaServiceImpl.class);
 
     private final PersonaRepository personaRepository;
+    private final UserRepository userService;
     private final PersonaMapper personaMapper = PersonaMapper.INSTANCE;
 
     private final PersonaUserMapper personaUserMapper = PersonaUserMapper.INSTANCE;
-    public PersonaServiceImpl(PersonaRepository personaRepository) {
+    public PersonaServiceImpl(PersonaRepository personaRepository, UserRepository userService) {
         this.personaRepository = personaRepository;
+        this.userService = userService;
     }
 
 
@@ -70,9 +74,12 @@ public class PersonaServiceImpl implements IPersonaServices {
         }
     }
 
+    @Transactional
     @Override
     public boolean delete(Long id) {
         if (personaRepository.findById(id).isPresent()){
+            Long personaId = personaRepository.findById(id).get().getUser().getPersona().getId();
+            userService.deleteByPersonaId(personaId);
             personaRepository.deleteById(id);
             return true;
         }else {
@@ -152,11 +159,11 @@ public class PersonaServiceImpl implements IPersonaServices {
         List<Object[]> personasUsers = personaRepository.findAllWithUser();
         return personasUsers.stream()
                 .map(personaUser -> {
-            Persona persona = (Persona) personaUser[0];
-            User user = (User) personaUser[1];
-            return personaUserMapper.toDTO(persona, user);
+                    Persona persona = (Persona) personaUser[0];
+                    User user = (User) personaUser[1];
+                    return personaUserMapper.toDTO(persona, user);
 
-        })
+                })
                 .collect(Collectors.toList());
     }
 

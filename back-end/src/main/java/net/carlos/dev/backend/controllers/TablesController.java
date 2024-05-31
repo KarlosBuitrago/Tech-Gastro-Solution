@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("gastro-tech/api/v1")
+@RequestMapping("gastro-tech/api/v1/")
 public class TablesController {
     @Autowired
     private TablesServiceImpl tablesService;
@@ -18,12 +18,12 @@ public class TablesController {
         System.out.println(tablesDTO.getDescription());
         return tablesService.save(tablesDTO);
     }
-    @PutMapping("/table")
+    @PutMapping("/table/update")
     public TablesDTO update(@RequestBody TablesDTO tablesDTO) {
         return tablesService.save(tablesDTO);
     }
 
-    @DeleteMapping("/table/{id}")
+    @DeleteMapping("/table/delete/{id}")
     public void delete(@PathVariable Long id) {
         tablesService.delete(id);
     }
@@ -32,6 +32,7 @@ public class TablesController {
     public TablesDTO findById(@PathVariable Long id) {
         return tablesService.findById(id);
     }
+
     @GetMapping("/tables")
     public List<TablesDTO> findAll() {
         return tablesService.findAll();

@@ -3,6 +3,8 @@ package net.carlos.dev.backend.controllers.users;
 import net.carlos.dev.backend.dto.users.PersonaDTO;
 import net.carlos.dev.backend.mappers.users.PersonaMapper;
 import net.carlos.dev.backend.service.impl.users.PersonaServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("gastro-tech/api/v1/users")
 public class PersonaController {
-
+    private static final Logger LOGGER = LogManager.getLogger(PersonaController.class);
 
     @Qualifier("IPersonaServices")
     private final PersonaServiceImpl personaService;
@@ -31,7 +33,7 @@ public class PersonaController {
         return ResponseEntity.ok(personaDTO);
     }
 
-    @PutMapping("/persona")
+    @PutMapping("/persona/update")
     public ResponseEntity<?> update(@RequestBody PersonaDTO persona) {
         return ResponseEntity.ok(personaService.update(persona));
     }
@@ -46,40 +48,43 @@ public class PersonaController {
         return ResponseEntity.ok(personaService.findAll());
     }
 
-    @GetMapping("/persona/{id}")
+    @GetMapping("/persona/id/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
         return ResponseEntity.ok(personaService.findById(id));
     }
 
-    @GetMapping("/persona/{identification}")
+    @GetMapping("/persona/identification/{identification}")
     public ResponseEntity<?> findByIdentification(@PathVariable Long identification) {
         return ResponseEntity.ok(personaService.findByIdentification(identification));
     }
 
-    @GetMapping("/persona/{name}")
+    @GetMapping("/persona/name/{name}")
     public ResponseEntity<?> findByName(@PathVariable String name) {
         return ResponseEntity.ok(personaService.findByFirstName(name));
     }
 
-    @GetMapping("/persona/{lastName}")
+    @GetMapping("/persona/lastname/{lastName}")
     public ResponseEntity<?> findByLastName(@PathVariable String lastName) {
         return ResponseEntity.ok(personaService.findByFirstLastName(lastName));
     }
 
-    @GetMapping("/persona/{email}")
+    @GetMapping("/persona/email/{email}")
     public ResponseEntity<?> findByEmail(@PathVariable String email) {
         return ResponseEntity.ok(personaService.findByEmail(email));
     }
 
-    @GetMapping("/persona/{age}")
+    @GetMapping("/persona/age/{age}")
     public ResponseEntity<?> findByAge(@PathVariable Integer age) {
         return ResponseEntity.ok(personaService.findByAge(age));
     }
 
-    @GetMapping("personasUsers")
+    @GetMapping("/personasUsers")
     public ResponseEntity<?> findAllPersonasUsers() {
+
         return ResponseEntity.ok(personaService.findAllPersonasUsers());
     }
+
+
     @GetMapping("personasUsers/active")
     public ResponseEntity<?> findAllPersonasUsersActive() {
         return ResponseEntity.ok(personaService.findAllPersonasUsers());
