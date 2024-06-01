@@ -86,7 +86,7 @@ if (!is_array($responseData)) {
                         <select class="form-control" id="categoryDishesDTO" name="categoryDishesDTO" Required>
                         <option value="">Seleccione categoría</option>
                         <?php foreach ($responseData as $category): ?>
-                          <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                          <option value="<?= $category['name'] ?>"><?= $category['name'] ?></option>
                         <?php endforeach; ?>
                         </select>
                       </div>
@@ -103,17 +103,14 @@ if (!is_array($responseData)) {
                       <input type="number" class="form-control" id="price" name="price" Required>
                     </div>
                     <div class="form-group">
-                      <label>File upload</label>
-                      <input type="file" name="img[]" class="file-upload-default">
-                      <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                        <span class="input-group-append">
-                          <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                        </span>
+                      <label>File upload</label>                      
+                      <div class="input-group col-xs-12">                     
+                        <input class="form-control" type="file" name="img[]" id="formFile" multiple>
                       </div>
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Guardar</button>
                     <button class="btn btn-light">Cancelar</button>
+                    <a class="btn btn-success" href="lista_platos.php">platos</a>
                   </form>
                 </div>
               </div>
