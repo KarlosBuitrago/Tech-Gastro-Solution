@@ -21,7 +21,7 @@
             <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Registrar nueva mesa</h4>
+                  <h4 class="card-title">Editar mesa</h4>
                   <form class="form-sample" id="" action=>
                     <form>
                         <div class="form-group">
