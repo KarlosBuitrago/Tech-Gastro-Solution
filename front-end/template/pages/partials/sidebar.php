@@ -25,12 +25,12 @@
           </div>
         </div>
       </div>
-      <p class="sidebar-menu-title">Menu</p>
+      <p class="sidebar-menu-title">Dash menu</p>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="home.php">
         <i class="typcn typcn-device-desktop menu-icon"></i>
-        <span class="menu-title">Estadisticas<span class="badge badge-primary ml-3"></span></span>
+        <span class="menu-title">Dashboard <span class="badge badge-primary ml-3">New</span></span>
       </a>
     </li>
     <li class="nav-item">
@@ -76,41 +76,41 @@
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
         <i class="typcn typcn-th-small-outline menu-icon"></i>
-        <span class="menu-title">Ordenes</span>
+        <span class="menu-title">Tables</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="tables">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Crear ordenes</a></li>
+          <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
         <i class="typcn typcn-compass menu-icon"></i>
-        <span class="menu-title">Comandas</span>
+        <span class="menu-title">Icons</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="icons">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="comandas.php">Editar</a></li>
+          <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
         <i class="typcn typcn-user-add-outline menu-icon"></i>
-        <span class="menu-title">Empleados</span>
+        <span class="menu-title">User Pages</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="auth">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="registrar_empleado.php">Registrar empleado </a></li>
-          <li class="nav-item"> <a class="nav-link" href="lista_empleados.php">Lista empleados</a></li>
+          <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
+          <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
         </ul>
       </div>
     </li>
-    <!--<li class="nav-item">
+    <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
         <i class="typcn typcn-globe-outline menu-icon"></i>
         <span class="menu-title">Error pages</span>
@@ -137,5 +137,5 @@
     <li class="nav-item"><a href="#" class="nav-link">#Sales</a></li>
     <li class="nav-item"><a href="#" class="nav-link">#Marketing</a></li>
     <li class="nav-item"><a href="#" class="nav-link">#Growth</a></li>
-  </ul>-->
+  </ul>
 </nav>

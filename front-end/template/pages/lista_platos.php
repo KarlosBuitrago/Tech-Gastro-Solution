@@ -102,9 +102,6 @@ if (!is_array($responseData)) {
                             Precion
                           </th>
                           <th>
-                            Fotos
-                          </th>
-                          <th>
                             Editar
                           </th>
                           <th>
@@ -115,17 +112,20 @@ if (!is_array($responseData)) {
                       <tbody>
                       <?php
                         if (is_array($responseData)){
-                            foreach ($responseData as $empleado) {
-                                if (is_array($empleado)) {
+                            foreach ($responseData as $dish) {
+                                if (is_array($dish)) {
                                     echo "<tr>";                                   
-                                    echo "<td>{$empleado['country']}</td>";
-                                    echo "<td>{$empleado['birthdate']}</td>";
-                                    echo "<td>{$empleado['age']}</td>";
-                                    echo "<td>{$empleado['username']}</td>";
-                                    echo "<td>{$empleado['role']}</td>";
-                                    echo "<td>{$empleado['status']}</td>"; 
-                                    echo "<td><a href='actualizar_empleado.php?id={$empleado['id']}' class='btn btn-warning btn-sm'>Editar <i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>";
-                                    echo "<td><a href='../php/eliminar_empleado.php?id={$empleado['id']}' class='btn btn-danger btn-sm'> Borrar<i class='fa fa-trash-o' aria-hidden='true'></i></a></td>";
+                                    echo "<td>{$dish['id']}</td>";
+                                    if (isset($dish['categoryDishes'])) {
+                                      echo "<td>{$dish['categoryDishes']['name']}</td>";
+                                    } else {
+                                        echo "<td>No disponible</td>";
+                                    }
+                                    echo "<td>{$dish['name']}</td>";
+                                    echo "<td>{$dish['description']}</td>";
+                                    echo "<td>{$dish['price']}</td>";
+                                    echo "<td><a href='actualizar_empleado.php?id={$dish['id']}' class='btn btn-warning btn-sm'>Editar <i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>";
+                                    echo "<td><a href='../php/eliminar_plato.php?id={$dish['id']}' class='btn btn-danger btn-sm'> Borrar<i class='fa fa-trash-o' aria-hidden='true'></i></a></td>";
                                     echo "</tr>";
                                 }else{
                                   echo "No llega un array, llego una cadena ";                        
