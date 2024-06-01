@@ -1,3 +1,62 @@
+<?php
+
+session_start();
+
+
+
+if (!isset($_SESSION['jwttoken'])) {
+  header('Location: ../index.php');
+  exit();
+}
+
+$token = $_SESSION['jwttoken'];
+echo $token;
+
+$curl = curl_init();
+
+curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/gastro-tech/api/v1/orders/order");
+
+curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
+
+curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+  "Authorization:" . $token,
+  "Content-Type: application/json"
+));
+
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+//$response = curl_exec($curl);
+
+if (curl_errno($curl)) {
+  echo "Curl error: " . curl_error($curl) . "\n";
+  curl_close($curl);
+  exit;
+}
+
+$response = curl_exec($curl);
+
+$httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+echo $httpCode;
+curl_close($curl);
+
+if ($response === null || $response === '') {
+  echo "Error: La respuesta está vacía.\n";
+  exit;
+}
+
+$responseData = json_decode($response, true);
+
+if ($httpCode >= 400) {
+    $responseData = array('error' => 'Error del servidor.');
+}
+
+if (!is_array($responseData)) {
+  echo "Error: Invalid JSON response from API.\n";
+  exit;
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,48 +129,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <th scope="row">4567</th>
-                        <td>
-
-                        </td>
-                        <td>
-                          
-                        </td>
-                        <td>
-                           
-                        </td>
-                        <td>
-                        
-                        </td>
-                        <td>
-                          
-                        </td>
-                        <td>
-                          
-                        </td>
-                        </tr>
-                        <tr>
-                        <th scope="row">2347</th>
-                        <td>
-                        
-                        </td>
-                        <td>
-                        
-                        </td>
-                        <td>
-                        
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-
-                        </td>
-                        </tr>
+                    <?php
+                        if (is_array($responseData)){
+                            foreach ($responseData as $OrdersDTO) {
+                                if (is_array($OrdersDTO)) {
+                                    echo "<tr>";
+                                    echo "<td>{$OrdersDTO['id']}</td>";
+                                    echo "<td>{$OrdersDTO['orderNumber']}</td>";
+                                    echo "<td>{$OrdersDTO['orderDate']}</td>";
+                                    echo "<td>{$OrdersDTO['status']}</td>";
+                                    echo "<td>{$OrdersDTO['userDTO']}</td>";
+                                    echo "<td>{$OrdersDTO['setablesDTO']}</td>";
+                                    echo "<td>{$OrdersDTO['paymentDTO']}</td>";
+                                    echo "</tr>";
+                                }else{
+                                  echo "No llega un array, llego una cadena ";                        
+                                
+                                }
+                            }  
+                          } else {
+                              echo "<tr><td colspan='10'>No hay ordenes registradas.</td></tr>";
+                          }
+                        ?>
                     </tbody>
                 </table>
         <!-- content-wrapper ends -->
