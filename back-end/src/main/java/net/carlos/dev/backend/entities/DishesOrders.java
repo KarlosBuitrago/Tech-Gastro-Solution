@@ -1,5 +1,6 @@
 package net.carlos.dev.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ public class DishesOrders {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "id_dishes", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
     private Dishes dishes;
     @ManyToOne
     @JoinColumn(name = "id_orders", referencedColumnName = "id", nullable = false)

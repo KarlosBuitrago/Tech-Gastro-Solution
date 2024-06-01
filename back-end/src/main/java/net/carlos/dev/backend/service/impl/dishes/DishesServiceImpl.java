@@ -35,19 +35,19 @@ public class DishesServiceImpl implements IDishesService {
 
     @Override
     public boolean createDishes(DishesDTO dishesDTO) {
-
         Dishes dishes = dishesMapper.toEntity(dishesDTO);
-        CategoryDishes categoryDishes1 = categoryDishesMapper.toEntity(dishesDTO.getCategoryDishesDTO());
-        categoryDishesRepository.save(categoryDishes1);
+        CategoryDishes categoryDishes1 = categoryDishesRepository.findByName(dishesDTO.getCategoryDishesDTO().getName());
+        if (categoryDishes1 == null) {
+            throw new IllegalArgumentException("La categoría no existe");
+        }
 
+        dishes.setCategoryDishes(categoryDishes1);
         List<PhotoDishes> photoDishes = dishesDTO.getPhotoDishesDTO().stream()
                 .map(photoDishesDTO1 -> photoDishesMapper.toEntity(photoDishesDTO1))
                 .peek(photoDishes1 -> photoDishes1.setDishes(dishes))
                 .collect(Collectors.toList());
 
-        dishes.setCategoryDishes(categoryDishes1);
         dishes.setPhotoDishes(photoDishes);
-
         dishesRepository.save(dishes);
         return true;
 

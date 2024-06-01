@@ -1,5 +1,9 @@
 package net.carlos.dev.backend.entities.dishes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 import net.carlos.dev.backend.entities.DishesOrders;
@@ -19,14 +23,17 @@ public class Dishes {
     private String description;
     @Column(name = "price")
     private Double price;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinColumn(name = "category_dishes_id")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "name")
     private CategoryDishes categoryDishes;
 
-    @OneToMany(mappedBy = "dishes" ,cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "dishes" ,cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
+    @JsonManagedReference
     private List<PhotoDishes> photoDishes;
 
-    @OneToMany(mappedBy = "dishes" ,cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "dishes" ,cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
+    @JsonManagedReference
     private List<DishesOrders> dishesOrders;
 
 }

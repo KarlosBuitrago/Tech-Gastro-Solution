@@ -1,5 +1,7 @@
 package net.carlos.dev.backend.entities.dishes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,5 +16,6 @@ public class PhotoDishes {
     private String url;
     @ManyToOne
     @JoinColumn(name = "dishes_id")
+    @JsonBackReference
     private Dishes dishes;
 }
