@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("gastro-tech/api/v1/")
+@RequestMapping("gastro-tech/api/v1")
 public class TablesController {
     @Autowired
     private TablesServiceImpl tablesService;
@@ -24,8 +24,9 @@ public class TablesController {
     }
 
     @DeleteMapping("/table/delete/{id}")
-    public void delete(@PathVariable Long id) {
+    public boolean delete(@PathVariable Long id) {
         tablesService.delete(id);
+        return true;
     }
 
     @GetMapping("/table/{id}")

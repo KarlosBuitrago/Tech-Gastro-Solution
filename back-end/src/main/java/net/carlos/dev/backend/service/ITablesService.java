@@ -8,6 +8,6 @@ public interface ITablesService {
     List<TablesDTO> findAll();
     TablesDTO findById(Long id);
     TablesDTO save(TablesDTO tablesDTO);
-    void delete(Long id);
+    boolean delete(Long id);
     TablesDTO update(TablesDTO tablesDTO);
 }

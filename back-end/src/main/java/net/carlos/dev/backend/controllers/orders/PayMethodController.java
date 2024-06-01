@@ -18,27 +18,27 @@ public class PayMethodController {
         return payMethodService.savePayMethod(paymentMethodDTO);
     }
 
-    @PutMapping("/pay-method")
+    @PutMapping("/pay-method/update")
     public boolean updatePayMethod(@RequestBody PaymentMethodDTO paymentMethodDTO){
         return payMethodService.updatePayMethod(paymentMethodDTO);
     }
 
-    @DeleteMapping("/pay-method/{id}")
+    @DeleteMapping("/pay-method/delete/{id}")
     public boolean deletePayMethod(@PathVariable Long id){
         return payMethodService.deletePayMethod(id);
     }
 
-    @GetMapping("/pay-method/{id}")
+    @GetMapping("/pay-method/id/{id}")
     public PaymentMethodDTO getPayMethodById(@PathVariable Long id){
         return payMethodService.getPayMethodById(id);
     }
 
-    @GetMapping("/pay-method")
+    @GetMapping("/pay-methods")
     public List<PaymentMethodDTO> getAllPayMethods(){
         return payMethodService.getAllPayMethods();
     }
 
-    @GetMapping("/pay-method/{name}")
+    @GetMapping("/pay-method/name/{name}")
     public PaymentMethodDTO getPayMethodByName(@PathVariable String name){
         return payMethodService.getPayMethodByName(name);
     }

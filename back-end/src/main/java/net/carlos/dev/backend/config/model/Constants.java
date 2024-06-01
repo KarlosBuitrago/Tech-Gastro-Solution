@@ -16,8 +16,9 @@ public class Constants {
 	
 	// JWT
 	public static final String SUPER_SECRET_KEY = "ZnJhc2VzbGFyZ2FzcGFyYWNvbG9jYXJjb21vY2xhdmVlbnVucHJvamVjdG9kZWVtZX";
-	public static final long TOKEN_EXPIRATION_TIME = 864_000_000; // 10 day
-	public static Key getSigningKey864(String secret) { 
+//	public static final long TOKEN_EXPIRATION_TIME = 864_000_000; // 10 day
+	public static final long TOKEN_EXPIRATION_TIME = 3_600_000;
+	public static Key getSigningKey864(String secret) {
 		byte[] keyBytes = Decoders.BASE64.decode(secret); 
 		return Keys.hmacShaKeyFor(keyBytes);
 	}

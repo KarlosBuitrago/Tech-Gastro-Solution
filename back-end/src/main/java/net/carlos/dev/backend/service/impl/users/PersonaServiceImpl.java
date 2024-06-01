@@ -178,4 +178,14 @@ public class PersonaServiceImpl implements IPersonaServices {
                 })
                 .collect(Collectors.toList());
     }
+
+    public Object findByUsername(String username) {
+        if (personaRepository.findByUsername(username) != null) {
+            LOGGER.info("persona", personaRepository.findByUsername(username).getFirstName());
+            return personaRepository.findByUsername(username);
+        } else {
+            LOGGER.error("No se pudo encontrar la persona");
+            return null;
+        }
+    }
 }
