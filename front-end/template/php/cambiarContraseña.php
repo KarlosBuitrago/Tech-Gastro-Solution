@@ -4,20 +4,19 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $oldPassword = $_POST['oldPassword'];
-    $newPassword = $_POST['newPassword'];
+    $newPassword = $_POST['password'];
 
     $data = array(
         "username" => $username,
-        "newPassword" => $newPassword
+        "password" => $newPassword
     );
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/changePassword");
-    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
     curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
     curl_setopt($curl, CURLOPT_HTTPHEADER, array(
         "Content-Type: application/json",
-        "Authorization: " . $_SESSION['jwttoken']
     ));
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 

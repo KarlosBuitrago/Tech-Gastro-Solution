@@ -1,9 +1,44 @@
 <?php
+
 session_start();
 
 if (!isset($_SESSION['jwttoken'])) {
-    header('Location: ../index.php');
-    exit();
+  header('Location: ../index.php');
+  exit();
+}
+
+$token = $_SESSION['jwttoken'];
+
+$curl = curl_init();
+
+curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/gastro-tech/api/v1/orders/pay-methods");
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+      "Authorization:" . $token,
+      "Content-Type: application/json"
+    ));
+
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+
+if (curl_errno($curl)) {
+  echo "Curl error: " . curl_error($curl) . "\n";
+  curl_close($curl);
+  exit;
+}
+
+$response = curl_exec($curl);
+
+$httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+curl_close($curl);
+
+
+$responseData = json_decode($response, true);
+
+if ($httpCode >= 400) {
+    $responseData = array('error' => 'Error del servidor.');
 }
 ?>
 <!DOCTYPE html>
@@ -29,7 +64,7 @@ if (!isset($_SESSION['jwttoken'])) {
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Registrar Métodos de Pago</h4>
-                  <form class="form-sample" id="registrarMetodoPagoForm" action="php/guardar_metodo_pago.php" method="post">
+                  <form class="form-sample" id="registrarMetodoPagoForm" action="../php/guardar_metodo_pago.php" method="post">
                     <p class="card-description">
                     </p>
                     <div class="row">
@@ -75,10 +110,11 @@ if (!isset($_SESSION['jwttoken'])) {
                         if (is_array($responseData)){
                             foreach ($responseData as $empleado) {
                                 if (is_array($empleado)) {
-                                    echo "<tr>";                                   
+                                    echo "<tr>"; 
+                                    echo "<td>{$empleado['id']}</td>";                                  
                                     echo "<td>{$empleado['name']}</td>"; 
-                                    echo "<td><a href='actualizar_empleado.php?id={$empleado['id']}' class='btn btn-warning btn-sm'>Editar <i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>";
-                                    echo "<td><a href='../php/eliminar_empleado.php?id={$empleado['id']}' class='btn btn-danger btn-sm'> Borrar<i class='fa fa-trash-o' aria-hidden='true'></i></a></td>";
+                                    echo "<td><a href='editar_metodo_pago.php?id={$empleado['id']}' class='btn btn-warning btn-sm'>Editar <i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>";
+                                    echo "<td><a href='../php/eliminar_metodo_pago.php?id={$empleado['id']}' class='btn btn-danger btn-sm'> Borrar<i class='fa fa-trash-o' aria-hidden='true'></i></a></td>";
                                     echo "</tr>";
                                 }else{
                                   echo "No llega un array, llego una cadena ";                        

@@ -3,12 +3,12 @@
     <li class="nav-item">
       <div class="d-flex sidebar-profile">
         <div class="sidebar-profile-image">
-          <img src="../images/faces/face29.png" alt="image">
+          <!-- <img src="../images/faces/face29.png" alt="image"> -->
           <span class="sidebar-status-indicator"></span>
         </div>
         <div class="sidebar-profile-name">
           <p class="sidebar-name">
-            Kenneth Osborne
+          <?php echo $_SESSION['userDetails']['firstName']." ". $_SESSION['userDetails']['firstLastName']; ?>
           </p>
           <p class="sidebar-designation">
             Welcome
@@ -44,6 +44,7 @@
           <li class="nav-item"> <a class="nav-link" href="lista_platos.php">Platos</a></li>
           <li class="nav-item"> <a class="nav-link" href="crear_plato.php">Crear plato</a></li>
           <li class="nav-item"> <a class="nav-link" href="categoria_plato.php">Categoria plato</a></li>
+          <li class="nav-item"> <a class="nav-link" href="actualizar_plato.php">Editar plato</a></li>
         </ul>
       </div>
     </li>

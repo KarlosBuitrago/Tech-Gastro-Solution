@@ -1,3 +1,5 @@
+
+
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
     <a class="navbar-brand brand-logo" href="home.php"><img src="../images/logo.svg" alt="logo"/></a>
@@ -126,7 +128,7 @@
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle  pl-0 pr-0" href="#" data-toggle="dropdown" id="profileDropdown">
           <i class="typcn typcn-user-outline mr-0"></i>
-          <span class="nav-profile-name">Evan Morales</span>
+          <span class="nav-profile-name"><?php echo $_SESSION['userDetails']['firstName']." ". $_SESSION['userDetails']['firstLastName']; ?></span>
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">            
           <a class="dropdown-item" href="pages/samples/register.html">
