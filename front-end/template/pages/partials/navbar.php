@@ -11,23 +11,23 @@
   <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
     <ul class="navbar-nav mr-lg-2">
       <li class="nav-item  d-none d-lg-flex">
-        <a class="nav-link" href="#">
-          Calendar
+        <a class="nav-link active" href="ordenes.php">
+          Reporte de ordenes
         </a>
       </li>
       <li class="nav-item  d-none d-lg-flex">
         <a class="nav-link active" href="home.php">
-          Statistic
+          Estadisticas
         </a>
       </li>
       <li class="nav-item  d-none d-lg-flex">
-        <a class="nav-link" href="registrar_empleado.php">
-          Employee
+        <!--<a class="nav-link" href="registrar_empleado.php">
+          Employee-->
         </a>
       </li>
     </ul>
     <ul class="navbar-nav navbar-nav-right">
-      <li class="nav-item d-none d-lg-flex  mr-2">
+       <!--<li class="nav-item d-none d-lg-flex  mr-2">
         <a class="nav-link" href="#">
           Help
         </a>
@@ -37,8 +37,8 @@
           <i class="typcn typcn-message-typing"></i>
           <span class="count bg-success">2</span>
         </a>
-        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-          <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
+         <<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+         <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
           <a class="dropdown-item preview-item">
             <div class="preview-thumbnail">
               <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
@@ -124,7 +124,7 @@
             </div>
           </a>
         </div>
-      </li>
+      </li>-->
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle  pl-0 pr-0" href="#" data-toggle="dropdown" id="profileDropdown">
           <i class="typcn typcn-user-outline mr-0"></i>
