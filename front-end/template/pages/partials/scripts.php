@@ -17,3 +17,16 @@
 <!-- Custom js for this page-->
 <script src="../js/dashboard.js"></script>
 <!-- End custom js for this page-->
+
+<script src="../../js/file-upload.js"></script>
+<script src="../../js/typeahead.js"></script>
+<script src="../../js/select2.js"></script>
+<!-- End custom js for this page-->
+
+<!-- endinject -->
+  <!-- plugin js for this page -->
+  <script src="../../vendors/chart.js/Chart.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- Custom js for this page-->
+  <script src="../../js/chart.js"></script>
+  <!-- End custom js for this page-->

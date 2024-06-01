@@ -36,8 +36,8 @@ $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 curl_close($curl);
 
 if ($response === null || $response === '') {
-  header('Location: ../pages/sample/error-404.html');
-    exit;
+  echo "Error: La respuesta está vacía.\n";
+  exit;
 }
 
 $responseData = json_decode($response, true);
@@ -50,6 +50,7 @@ if (!is_array($responseData)) {
   echo "Error: Invalid JSON response from API.\n";
   exit;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +76,6 @@ if (!is_array($responseData)) {
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Mesas</h4>
-                  <form class="form-sample" id="" action=>
                   <table class="table">
                     <thead>
                         <tr>
@@ -87,26 +87,21 @@ if (!is_array($responseData)) {
                         </tr>
                     </thead>
                     <tbody>
-                      <?php
+                    <?php
                       if (is_array($responseData)){
-                          foreach ($responseData as $empleado) {
-                              if (is_array($empleado)) {
-                                  echo "<tr>";                                   
-                                  echo "<td>{$empleado['id']}</td>";
-                                  echo "<td>{$empleado['name']}</td>";
-                                  echo "<td>{$empleado['description']}</td>";
-                                  echo "<td><a href='actualizar_empleado.php?id={$empleado['id']}' class='btn btn-warning btn-sm'>Editar <i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>";
-                                  echo "<td><a href='../php/eliminar_empleado.php?id={$empleado['id']}' class='btn btn-danger btn-sm'> Borrar<i class='fa fa-trash-o' aria-hidden='true'></i></a></td>";
-                                  echo "</tr>";
-                              }else{
-                                echo "No llega un array, llego una cadena ";                        
-                              
-                              }
+                          foreach ($responseData as $table) {
+                            echo "<tr>";                                   
+                            echo "<td>{$table['id']}</td>";
+                            echo "<td>{$table['name']}</td>";
+                            echo "<td>{$table['description']}</td>";
+                            echo "<td><a href='editar_mesas.php?id={$table['id']}' class='btn btn-warning btn-sm'>Editar <i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>";
+                            echo "<td><a href='../php/eliminar_mesa.php?id={$table['id']}' class='btn btn-danger btn-sm'> Borrar<i class='fa fa-trash-o' aria-hidden='true'></i></a></td>";
+                            echo "</tr>";
                           }  
-                        } else {
-                            echo "<tr><td colspan='10'>No hay mesas registradas.</td></tr>";
-                        }
-                      ?>
+                      } else {
+                          echo "<tr><td colspan='10'>No hay mesas registradas.</td></tr>";
+                      }
+                    ?>
                     </tbody>
                   </table> 
                   <div class="form-group">

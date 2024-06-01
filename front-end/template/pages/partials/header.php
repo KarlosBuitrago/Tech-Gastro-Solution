@@ -6,11 +6,13 @@
     <!-- base:css -->
     <link rel="stylesheet" href="../vendors/typicons.font/font/typicons.css">
     <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
-    <!-- endinject --> 
-    <!-- plugin css for this page -->
-    <!-- End plugin css for this page -->
+    <!-- endinject -->
     <!-- inject:css -->
     <link rel="stylesheet" href="../css/vertical-layout-light/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="../images/favicon.png" />
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" href="../../vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="../../vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+  
 </head>

@@ -18,13 +18,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     );
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/gastro-tech/api/v1/orders/pay-method");
-    curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
-    curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-        "Authorization:" . $token,
-        "Content-Type: application/json"
-    ));
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'http://localhost:9000/gastro-tech/api/v1/orders/pay-method/update',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_CUSTOMREQUEST => 'PUT',
+        CURLOPT_POSTFIELDS =>  json_encode($data),
+        CURLOPT_HTTPHEADER => array(
+          "Authorization: " . $token,
+          "Content-Type: application/json"
+        ),
+      ));
+    
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
     $response = curl_exec($curl);

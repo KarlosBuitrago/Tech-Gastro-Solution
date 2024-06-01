@@ -1,3 +1,58 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION['jwttoken'])) {
+  header('Location: ../index.php');
+  exit();
+}
+
+$token = $_SESSION['jwttoken'];
+
+$curl = curl_init();
+
+curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/gastro-tech/api/v1/dishes/dishes");
+
+curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
+
+curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+  "Authorization:" . $token,
+  "Content-Type: application/json"
+));
+
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+
+if (curl_errno($curl)) {
+  echo "Curl error: " . curl_error($curl) . "\n";
+  curl_close($curl);
+  exit;
+}
+
+$response = curl_exec($curl);
+
+$httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+curl_close($curl);
+
+if ($response === null || $response === '') {
+  echo "Error: La respuesta está vacía.\n";
+  exit;
+}
+
+$responseData = json_decode($response, true);
+
+if ($httpCode >= 400) {
+    $responseData = array('error' => 'Error del servidor.');
+}
+
+if (!is_array($responseData)) {
+  echo "Error: Invalid JSON response from API.\n";
+  exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

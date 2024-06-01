@@ -12,22 +12,28 @@ if ($token == null) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_FILES['photoDishesDTO'])) {
       $errors = array();
-      $path = '../images/dishes/'; 
+      $path = 'http://localhost/gastro-tech/images/dishes/'; 
+      if (!file_exists($path)) {
+        mkdir($path, 0777, true);
+    }
+      $file_urls = array(); // Array para almacenar las URLs de los archivos
+      $extensions = array('jpg', 'jpeg', 'png'); // Ajusta esto a las extensiones que quieras permitir
 
       $all_files = count($_FILES['photoDishesDTO']['tmp_name']);
 
       for ($i = 0; $i < $all_files; $i++) {
-          $file_name = $_FILES['photoDishesDTO']['names'][$i];
+          $file_name = $_FILES['photoDishesDTO']['name'][$i];
           $file_tmp = $_FILES['photoDishesDTO']['tmp_name'][$i];
           $file_type = $_FILES['photoDishesDTO']['type'][$i];
           $file_size = $_FILES['photoDishesDTO']['size'][$i];
-          $file_ext = strtolower(end(explode('.', $_FILES['photoDishesDTO']['names'][$i])));
+          $file_ext = strtolower(end(explode('.', $_FILES['photoDishesDTO']['name'][$i])));
 
           $file = $path . $file_name;
 
-          if(move_uploaded_file($file_tmp, path)){
+          if(move_uploaded_file($file_tmp, $file)){
             echo "Archivo subido con exito";
-          }{
+            $file_urls[] = "http://localhost/gastro-tech/images/dishes/" . $file; // Añade la URL del archivo al array
+          } else {
             echo "Error al subir el archivo";
           }
 
@@ -38,10 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           if ($file_size > 2097152) {
               $errors[] = 'File size exceeds limit: ' . $file_name . ' ' . $file_type;
           }
-
-          if (empty($errors)) {
-              move_uploaded_file($file_tmp, $file);
-          }
       }
 
       if ($errors) print_r($errors);
@@ -51,13 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $descripcion = $_POST['description'];
   $precio = $_POST['price'];
   $categoria = $_POST['categoryDishesDTO'];
-  $file = $_POST['photoDishesDTO'];
 
   $data = array("name" => $plato,
                 "description" => $descripcion,
                 "price" => $precio,
                 "categoryDishesDTO" => $categoria,
-                "photoDishesDTO" => $file,
+                "photoDishesDTO" => $file_urls, // Envía las URLs de los archivos
                 );
 
 
@@ -95,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Decode JSON response (if applicable)
                 $responseData = json_decode($response, true);
 
-  
+
   if ($responseData !== null) {
     header('Location: ../pages/crear_plato.php');
       exit;          
