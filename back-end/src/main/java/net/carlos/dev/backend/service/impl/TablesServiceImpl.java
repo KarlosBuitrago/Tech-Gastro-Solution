@@ -8,6 +8,7 @@ import net.carlos.dev.backend.service.ITablesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service("ITablesService")
 public class TablesServiceImpl implements ITablesService {
@@ -19,11 +20,20 @@ public class TablesServiceImpl implements ITablesService {
 
     @Override
     public List<TablesDTO> findAll() {
-        return List.of();
+        List<Tables> tables = tablesRepository.findAll();
+        List<TablesDTO> tablesDTOS = new ArrayList<>();
+        for (Tables table : tables){
+            tablesDTOS.add(tablesMapper.toDTO(table));
+        }
+        return tablesDTOS;
     }
 
     @Override
     public TablesDTO findById(Long id) {
+        Tables tables = tablesRepository.findById(id).orElse(null);
+        if (tables != null){
+            return tablesMapper.toDTO(tables);
+        }
         return null;
     }
 
@@ -40,8 +50,13 @@ public class TablesServiceImpl implements ITablesService {
     }
 
     @Override
-    public void delete(Long id) {
-
+    public boolean delete(Long id) {
+        if (tablesRepository.findById(id).isEmpty()){
+            return false;
+        }else {
+            tablesRepository.deleteById(id);
+            return true;
+        }
     }
 
     @Override

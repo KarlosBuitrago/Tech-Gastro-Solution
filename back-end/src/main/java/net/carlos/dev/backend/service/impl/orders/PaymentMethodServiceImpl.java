@@ -8,6 +8,7 @@ import net.carlos.dev.backend.service.orders.IPayMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -63,7 +64,12 @@ public class PaymentMethodServiceImpl implements IPayMethodService {
     @Override
     public List<PaymentMethodDTO> getAllPayMethods() {
         if (!paymentMethodRepository.findAll().isEmpty()){
-            return Collections.singletonList(payMethodMapper.toDTO((PaymentMethod) paymentMethodRepository.findAll()));
+            List<PaymentMethod> paymentMethods = paymentMethodRepository.findAll();
+            List<PaymentMethodDTO> paymentMethodDTOS = new ArrayList<>();
+            for (PaymentMethod paymentMethod : paymentMethods){
+                paymentMethodDTOS.add(payMethodMapper.toDTO(paymentMethod));
+            }
+            return paymentMethodDTOS;
         }
         return null;
     }

@@ -1,5 +1,6 @@
 package net.carlos.dev.backend.entities.users;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -40,6 +41,7 @@ public class Persona {
     private String role;
 
     @OneToOne(mappedBy = "persona")
+    @JsonBackReference
     private User user;
 
 }

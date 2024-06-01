@@ -12,11 +12,18 @@ public interface PersonaRepository extends JpaRepository<Persona, Long> {
     Persona findByFirstName(String firstName);
     Persona findByFirstLastName(String firstLastName);
     Persona findByAge(Integer age);
-
     Persona findByEmail(String email);
+    @Query("SELECT p, u FROM Persona p JOIN p.user u WHERE u.username = ?1")
+    Persona findByUsername(String username);
+
     @Query("SELECT p, u FROM Persona p JOIN p.user u")
     List<Object[]> findAllWithUser();
 
     @Query("SELECT p, u FROM Persona p JOIN p.user u WHERE u.status = 'Active'")
     List<Object[]> findAllWithActiveUser();
+
+    @Query("SELECT p, u FROM Persona p JOIN p.user u WHERE u.status = 'Inactive'")
+    List<Object[]> findAllWithInActiveUser();
+
+
 }

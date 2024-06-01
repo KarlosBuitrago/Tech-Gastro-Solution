@@ -15,15 +15,15 @@ public class PhotoDishesController {
     public PhotoDishes save(@RequestBody PhotoDishes photoDishes) {
         return photoDishesService.save(photoDishes);
     }
-    @PutMapping("/photoDish")
+    @PutMapping("/photoDish/update")
     public PhotoDishes update(@RequestBody PhotoDishes photoDishes) {
         return photoDishesService.update(photoDishes);
     }
-    @DeleteMapping("/photoDish/{id}")
+    @DeleteMapping("/photoDish/delete/{id}")
     public void delete(@PathVariable Long id) {
         photoDishesService.delete(id);
     }
-
+    @GetMapping("/photoDish/id/{id}")
     public PhotoDishes findById(@PathVariable Long id) {
         return photoDishesService.findById(id);
     }
