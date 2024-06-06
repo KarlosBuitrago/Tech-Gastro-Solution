@@ -27,13 +27,9 @@ public class Dishes {
     @JoinColumn(name = "category_dishes_id")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "name")
     private CategoryDishes categoryDishes;
-
     @OneToMany(mappedBy = "dishes" ,cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
-    @JsonManagedReference
     private List<PhotoDishes> photoDishes;
-
     @OneToMany(mappedBy = "dishes" ,cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
-    @JsonManagedReference
     private List<DishesOrders> dishesOrders;
 
 }

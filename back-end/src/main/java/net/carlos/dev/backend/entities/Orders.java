@@ -1,5 +1,6 @@
 package net.carlos.dev.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -20,14 +21,14 @@ public class Orders {
     private String orderDate;
     @Column(name = "status")
     private String status;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinColumn(name = "table_id")
     private Tables tables;
-    @OneToOne(mappedBy = "orders")
+    @OneToOne(mappedBy = "orders", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private Payment payment;
-    @OneToMany(mappedBy = "orders")
+    @OneToMany(mappedBy = "orders", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
     private List<DishesOrders> dishesOrders;
 }

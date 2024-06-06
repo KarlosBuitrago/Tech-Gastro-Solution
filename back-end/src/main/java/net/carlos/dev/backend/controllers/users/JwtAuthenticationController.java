@@ -3,6 +3,7 @@ package net.carlos.dev.backend.controllers.users;
 import net.carlos.dev.backend.config.JWTAuthtenticationConfig;
 import net.carlos.dev.backend.config.model.JwtRequest;
 import net.carlos.dev.backend.config.model.JwtResponse;
+import net.carlos.dev.backend.service.impl.users.UserServiceImpl;
 import net.carlos.dev.backend.service.users.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,7 +26,10 @@ public class JwtAuthenticationController {
 	UserDetailsService jwtInMemoryUserDetailsService;
 	@Qualifier("IUserService")
 	@Autowired
-	private IUserService userServiceImpl;
+	private IUserService userService;
+
+	@Autowired
+	private UserServiceImpl userServiceImpl;
 
 	@Operation(summary = "Crea un token de autenticación", description = "Genera un token JWT para autenticación")
     @ApiResponses(value = {

@@ -14,12 +14,11 @@ public class DishesOrders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_dishes", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
     private Dishes dishes;
-    @ManyToOne
-    @JoinColumn(name = "id_orders", referencedColumnName = "id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "orders_id")
     private Orders orders;
     @Column(name = "date_time_order", nullable = false)
     private String dateTimeOrder;

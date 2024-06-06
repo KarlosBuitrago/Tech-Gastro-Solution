@@ -11,4 +11,6 @@ public interface IDishesOrdersService {
     DishesOrdersDTO getDishesOrdersById(Long id);
     List<DishesOrdersDTO> getAllDishesOrders();
     DishesOrdersDTO getDishesOrdersByName(String name);
+
+//    List<DishesOrdersDTO> getDishesOrdersByUsername(String username);
 }

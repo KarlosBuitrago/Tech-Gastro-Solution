@@ -1,5 +1,6 @@
 package net.carlos.dev.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 @Data

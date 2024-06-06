@@ -19,10 +19,10 @@ public interface PersonaRepository extends JpaRepository<Persona, Long> {
     @Query("SELECT p, u FROM Persona p JOIN p.user u")
     List<Object[]> findAllWithUser();
 
-    @Query("SELECT p, u FROM Persona p JOIN p.user u WHERE u.status = 'Active'")
+    @Query("SELECT p, u FROM Persona p JOIN p.user u WHERE u.status = 'Activo'")
     List<Object[]> findAllWithActiveUser();
 
-    @Query("SELECT p, u FROM Persona p JOIN p.user u WHERE u.status = 'Inactive'")
+    @Query("SELECT p, u FROM Persona p JOIN p.user u WHERE u.status = 'Inactivo'")
     List<Object[]> findAllWithInActiveUser();
 
 

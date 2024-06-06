@@ -1,6 +1,7 @@
 package net.carlos.dev.backend.entities.users;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,9 +18,9 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "users")
 public class User {
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "persona_id", referencedColumnName = "id")
-    @JsonManagedReference
     private Persona persona;
     @Id
     @Column(name = "username", nullable = false, unique = true)
@@ -33,10 +34,8 @@ public class User {
     @Column(name = "apikey", nullable = false)
     private String apikey;
     @OneToMany(mappedBy = "user")
-    @JsonBackReference
     private List<UsersActivityLogs> usersActivityLogs;
     @OneToMany(mappedBy = "user")
-    @JsonBackReference
     private List<Orders> orders;
 
 }

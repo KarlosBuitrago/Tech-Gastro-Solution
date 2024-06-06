@@ -16,6 +16,5 @@ public class PhotoDishes {
     private String url;
     @ManyToOne
     @JoinColumn(name = "dishes_id")
-    @JsonBackReference
     private Dishes dishes;
 }

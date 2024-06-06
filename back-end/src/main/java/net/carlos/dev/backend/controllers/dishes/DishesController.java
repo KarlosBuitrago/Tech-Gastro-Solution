@@ -41,4 +41,9 @@ public class DishesController {
     public List<Dishes> findAll(){
         return dishesService.findAll();
     }
+
+    @GetMapping("/dish/id/{id}")
+    public Dishes findById(Long id){
+        return dishesService.findById(id);
+    }
 }

@@ -19,19 +19,19 @@ public class DishesOrdersController {
         return true;
     }
 
-    @PutMapping("/dishes-orders")
+    @PutMapping("/dishes-orders/update")
     public boolean updateDishesOrders(@RequestBody DishesOrdersDTO dishesOrdersDTO){
         dishesOrdersService.updateDishesOrders(dishesOrdersDTO);
         return true;
     }
 
-    @DeleteMapping("/dishes-orders/{id}")
+    @DeleteMapping("/dishes-orders/delete/{id}")
     public boolean deleteDishesOrders(@PathVariable Long id){
         dishesOrdersService.deleteDishesOrders(id);
         return true;
     }
 
-    @GetMapping("/dishes-orders/{id}")
+    @GetMapping("/dishes-orders/id/{id}")
     public DishesOrdersDTO getDishesOrdersById(@PathVariable Long id){
         return dishesOrdersService.getDishesOrdersById(id);
     }
@@ -41,9 +41,13 @@ public class DishesOrdersController {
         return dishesOrdersService.getAllDishesOrders();
     }
 
-    @GetMapping("/dishes-orders/{name}")
+    @GetMapping("/dishes-orders/name/{name}")
     public DishesOrdersDTO getDishesOrdersByName(@PathVariable String name){
         return dishesOrdersService.getDishesOrdersByName(name);
     }
+//    @GetMapping("/dishes/username/{username}")
+//    public List<DishesOrdersDTO> getDishesOrdersByUsername(@PathVariable String username){
+//        return dishesOrdersService.getDishesOrdersByUsername(username);
+//    }
 
 }

@@ -21,7 +21,5 @@ public class CategoryDishes {
     @Column(name = "nameCategory", nullable = false)
     private String name;
     @OneToMany(mappedBy = "categoryDishes", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Dishes> dishes;
-
 }

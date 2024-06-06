@@ -41,6 +41,7 @@ public class IOrdersServiceImpl implements IOrdersService {
     public boolean saveOrder(OrdersDTO orderDTO) {
         TablesDTO tablesDTO = orderDTO.getTablesDTO();
         orderDTO.setDateNow();
+        orderDTO.calculateOrderNumber();
         orderDTO.setTablesDTO(tablesDTO);
         Orders orders = ordersMapper.toEntity(orderDTO);
         User user = userRepository.findByUsername(orderDTO.getUserDTO().getUsername());
@@ -94,5 +95,15 @@ public class IOrdersServiceImpl implements IOrdersService {
     public List<OrdersDTO> getOrdersByStatus(String status) {
         List<Orders> orders = ordersRepository.findByStatus(status);
         return orders.stream().map(ordersMapper::toDTO).toList();
+    }
+
+    public boolean updateStatus(Long id, String status) {
+        Orders orders = ordersRepository.findById(id).orElse(null);
+        if (orders != null) {
+            orders.setStatus(status);
+            ordersRepository.save(orders);
+            return true;
+        }
+        return false;
     }
 }

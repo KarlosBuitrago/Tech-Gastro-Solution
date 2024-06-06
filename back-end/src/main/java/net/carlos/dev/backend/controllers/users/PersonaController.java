@@ -85,13 +85,13 @@ public class PersonaController {
 
     @GetMapping("personasUsers/active")
     public ResponseEntity<?> findAllPersonasUsersActive() {
-        return ResponseEntity.ok(personaService.findAllPersonasUsers());
-    }
-
-    @GetMapping("personasUsers/inactive")
-    public ResponseEntity<?> findAllPersonasUsersInactive() {
         return ResponseEntity.ok(personaService.findAllPersonasUsersActive());
     }
+
+//    @GetMapping("personasUsers/inactive")
+//    public ResponseEntity<?> findAllPersonasUsersInactive() {
+//        return ResponseEntity.ok(personaService.fi());
+//    }
 
     @GetMapping("personasUsers/username/{username}")
     public ResponseEntity<?> findByUsername(@PathVariable String username) {

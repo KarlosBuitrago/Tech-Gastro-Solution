@@ -79,4 +79,11 @@ public class DishesOrdersServiceImpl implements IDishesOrdersService {
         }
         return null;
     }
+
+//    @Override
+//    public List<DishesOrdersDTO> getDishesOrdersByUsername(String username) {
+//        return dishesOrdersRepository.findByDishesUsername(username).stream().map(dishesOrdersMapper::toDTO).toList();
+//    }
+
+
 }
