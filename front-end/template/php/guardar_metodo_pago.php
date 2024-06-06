@@ -11,11 +11,14 @@ $token = $_SESSION['jwttoken'];
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
     $name = $_POST['name'];
 
     $data = array(
         "name" => $name
     );
+
+    var_dump($name);
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/gastro-tech/api/v1/orders/pay-method");
@@ -37,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         echo "Error al guardar el método de pago: " . $response;
     }
+
 } else {
     header('Location: ../samples/error-404.html');
     exit();

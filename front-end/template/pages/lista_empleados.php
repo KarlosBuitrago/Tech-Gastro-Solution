@@ -10,7 +10,6 @@ if (!isset($_SESSION['jwttoken'])) {
 }
 
 $token = $_SESSION['jwttoken'];
-echo $token;
 
 $curl = curl_init();
 
@@ -161,6 +160,7 @@ if (!is_array($responseData)) {
                                     echo "<td>{$empleado['identification']}</td>";
                                     echo "<td>{$empleado['firstName']}</td>";
                                     echo "<td>{$empleado['middleName']}</td>";
+                                    echo "<td>{$empleado['firstLastName']}</td>";
                                     echo "<td>{$empleado['secondLastName']}</td>";
                                     echo "<td>{$empleado['email']}</td>";
                                     echo "<td>{$empleado['phone']}</td>";
@@ -198,12 +198,8 @@ if (!is_array($responseData)) {
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:../../partials/_footer.html -->
-        <footer class="footer">
-            <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com</a> 2020</span>
-              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard </a>templates from Bootstrapdash.com</span>
-            </div>
-          </footer>
+        <?php include 'partials/footer.php'; ?> 
+
         <!-- partial -->
       </div>
       <!-- main-panel ends -->

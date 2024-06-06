@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 if (!isset($_SESSION['jwttoken'])) {
@@ -12,7 +13,7 @@ $id = $_GET['id'];
 
 $curl = curl_init();
 
-curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/gastro-tech/api/v1/orders/pay-method/id/".$id);
+curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/gastro-tech/api/v1/orders/pay-method/id/" .$id);
 
 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
 
@@ -103,5 +104,4 @@ if (!is_array($metodoPago)) {
   </div>
   <?php include '../partials/scripts.php'; ?>
 </body>
-
 </html>

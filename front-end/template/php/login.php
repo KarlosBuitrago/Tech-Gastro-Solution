@@ -10,6 +10,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $data = array("username" => $usuario,
                 "password" => $password);
 
+                echo "http://localhost:9000/gastro-tech/api/v1/users/personasUsers/username/" . $usuario;
+
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/authenticate");
   curl_setopt($curl, CURLOPT_POST, true);
@@ -51,7 +53,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         echo "Error al obtener los detalles del usuario: " ;
     }
 
-    // Redirige a otra página
+    //Redirige a otra página
     header('Location: ../pages/home.php');
     exit;
   } else {
