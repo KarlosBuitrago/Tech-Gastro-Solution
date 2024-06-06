@@ -15,7 +15,7 @@ session_start();
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
                 <a href="../index.php">
-                <img src="../images/logo.svg" alt="logo">
+                <img src="../images/logo.png" alt="logo">
                 </a>
               </div>
               <h4>Cambiar Contraseña</h4>

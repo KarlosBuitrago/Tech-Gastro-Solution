@@ -124,7 +124,7 @@ if (!is_array($responseData)) {
                                     echo "<td>{$dish['name']}</td>";
                                     echo "<td>{$dish['description']}</td>";
                                     echo "<td>{$dish['price']}</td>";
-                                    echo "<td><a href='actualizar_empleado.php?id={$dish['id']}' class='btn btn-warning btn-sm'>Editar <i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>";
+                                    echo "<td><a href='actualizar_plato.php?id={$dish['id']}' class='btn btn-warning btn-sm'>Editar <i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>";
                                     echo "<td><a href='../php/eliminar_plato.php?id={$dish['id']}' class='btn btn-danger btn-sm'> Borrar<i class='fa fa-trash-o' aria-hidden='true'></i></a></td>";
                                     echo "</tr>";
                                 }else{
