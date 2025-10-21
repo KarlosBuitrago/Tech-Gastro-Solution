@@ -11,7 +11,8 @@ $token = $_SESSION['jwttoken'];
 
 $curl = curl_init();
 
-curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/gastro-tech/api/v1/orders/dishes-orders-list");
+require_once __DIR__ . '/../config.php';
+curl_setopt($curl, CURLOPT_URL, api_url('/gastro-tech/api/v1/orders/dishes-orders-list'));
 
 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
 

@@ -26,7 +26,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-    CURLOPT_URL => 'http://localhost:9000/gastro-tech/api/v1/dishes/category-dishes',
+  require_once __DIR__ . '/../config.php';
+  CURLOPT_URL => api_url('/gastro-tech/api/v1/dishes/category-dishes'),
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_CUSTOMREQUEST => 'PUT',
     CURLOPT_POSTFIELDS =>  json_encode($data),

@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../config.php';
 // Autenticación para obtener el token
 
 session_start();
@@ -19,7 +20,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 "description" => $description);
 
   $curl = curl_init();
-  curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/gastro-tech/api/v1/table");
+  curl_setopt($curl, CURLOPT_URL, api_url('/gastro-tech/api/v1/table'));
   curl_setopt($curl, CURLOPT_POST, true);
   curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
   curl_setopt($curl, CURLOPT_HTTPHEADER, array(

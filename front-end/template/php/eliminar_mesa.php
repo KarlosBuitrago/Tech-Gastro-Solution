@@ -13,8 +13,10 @@ $id = $_GET['id'];
 
 $curl = curl_init();
 
+require_once __DIR__ . '/../config.php';
+
 curl_setopt_array($curl, array(
-    CURLOPT_URL => 'http://localhost:9000/gastro-tech/api/v1/table/delete/' . $id,
+    CURLOPT_URL => api_url('/gastro-tech/api/v1/table/delete/' . $id),
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_CUSTOMREQUEST => 'DELETE',
     CURLOPT_HTTPHEADER => array(

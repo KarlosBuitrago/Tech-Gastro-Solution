@@ -12,7 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     );
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/changePassword");
+    require_once __DIR__ . '/../config.php';
+    curl_setopt($curl, CURLOPT_URL, api_url('/changePassword'));
     curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
     curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
     curl_setopt($curl, CURLOPT_HTTPHEADER, array(

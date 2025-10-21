@@ -21,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     var_dump($name);
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/gastro-tech/api/v1/orders/pay-method");
+    require_once __DIR__ . '/../config.php';
+    curl_setopt($curl, CURLOPT_URL, api_url('/gastro-tech/api/v1/orders/pay-method'));
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
     curl_setopt($curl, CURLOPT_HTTPHEADER, array(

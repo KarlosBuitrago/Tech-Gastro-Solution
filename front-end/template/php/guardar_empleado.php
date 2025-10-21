@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../config.php';
 // Autenticación para obtener el token
 session_start();
 
@@ -38,11 +39,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 "birthdate" => $fechaNacimiento,
                 "role" => $role);
 
-
                 $curl = curl_init();
-
-                // Set the URL with proper protocol (assuming it's a REST API)
-                curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/gastro-tech/api/v1/users/persona");
+                
+                // Set the URL with proper protocol (using config helper)
+                curl_setopt($curl, CURLOPT_URL, api_url('/gastro-tech/api/v1/users/persona'));
                 
                 // Set POST method
                 curl_setopt($curl, CURLOPT_POST, true);
@@ -63,22 +63,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 
                 // Close cURL session
                 curl_close($curl);
-                
-                // Check for errors during execution
-                if (curl_errno($curl)) {
-                  echo "Curl error: " . curl_error($curl) . "\n";
-                  exit;
-                }
                                 
                 // Decode JSON response (if applicable)
                 $responseData = json_decode($response, true);
 
-  
+
   if ($responseData !== null) {
     header('Location: ../pages/registrar_empleado.php');
       exit;          
   } else {
-      // Manejar el error si la autenticación no fue exitosa
       echo "Error al guardar el usuario";
   }
 }

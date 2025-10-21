@@ -19,7 +19,8 @@ if (!isset($id)) {
 
 $curl = curl_init();
 
-curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/gastro-tech/api/v1/table/".$id);
+require_once __DIR__ . '/../config.php';
+curl_setopt($curl, CURLOPT_URL, api_url('/gastro-tech/api/v1/table/' . $id));
 
 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
 

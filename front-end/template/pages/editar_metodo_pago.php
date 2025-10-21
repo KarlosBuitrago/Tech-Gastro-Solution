@@ -13,7 +13,8 @@ $id = $_GET['id'];
 
 $curl = curl_init();
 
-curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/gastro-tech/api/v1/orders/pay-method/id/" .$id);
+require_once __DIR__ . '/../config.php';
+curl_setopt($curl, CURLOPT_URL, api_url('/gastro-tech/api/v1/orders/pay-method/id/' . $id));
 
 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
 

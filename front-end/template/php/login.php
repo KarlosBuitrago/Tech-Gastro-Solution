@@ -1,6 +1,6 @@
 <?php
 // Autenticación para obtener el token
-
+require_once __DIR__ . '/../config.php';
 session_start();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -10,10 +10,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $data = array("username" => $usuario,
                 "password" => $password);
 
-                echo "http://localhost:9000/gastro-tech/api/v1/users/personasUsers/username/" . $usuario;
-
   $curl = curl_init();
-  curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/authenticate");
+  curl_setopt($curl, CURLOPT_URL, api_url('/authenticate'));
   curl_setopt($curl, CURLOPT_POST, true);
   curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
   curl_setopt($curl, CURLOPT_HTTPHEADER, array(
@@ -27,16 +25,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   $responseData = json_decode($response, true);
 
-  if ($responseData['jwttoken']) {
+  if (!empty($responseData['jwttoken'])) {
     $_SESSION['jwttoken'] = $responseData['jwttoken'];
 
     // Hacer la segunda consulta a la API
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, "http://localhost:9000/gastro-tech/api/v1/users/personasUsers/username/" . $usuario); // Cambia esto a la URL de tu API
+    curl_setopt($curl, CURLOPT_URL, api_url('/gastro-tech/api/v1/users/personasUsers/username/' . $usuario));
     curl_setopt($curl, CURLOPT_HTTPGET, true);
     curl_setopt($curl, CURLOPT_HTTPHEADER, array(
         "Content-Type: application/json",
-        "Authorization: " . $_SESSION['jwttoken'] // Asegúrate de que tu API soporta la autenticación con Bearer tokens
+        "Authorization: " . $_SESSION['jwttoken']
     ));
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
@@ -46,19 +44,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if ($httpCode == 200) {
         $userDetails = json_decode($response, true); 
-        var_dump($userDetails);
-        $_SESSION['userDetails'] = $userDetails; // Almacena los detalles del usuario en la sesión
+        $_SESSION['userDetails'] = $userDetails;
     } else {
-        // Manejar el error si la solicitud no fue exitosa
-        echo "Error al obtener los detalles del usuario: " ;
+        echo "Error al obtener los detalles del usuario: ";
     }
 
-    //Redirige a otra página
     header('Location: ../pages/home.php');
     exit;
   } else {
-      // Manejar el error si la autenticación no fue exitosa
-      echo "Error en la autenticación: " . $responseData['message'];
+      echo "Error en la autenticación: " . ($responseData['message'] ?? 'Unknown');
   }
 }
 ?>
