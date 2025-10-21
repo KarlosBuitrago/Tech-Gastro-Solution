@@ -13,4 +13,4 @@ ENV JAVA_OPTS=""
 ENV PORT=9000
 
 EXPOSE ${PORT}
-ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar /app.jar --server.port=${PORT}"]
+ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar app.jar --server.port=${PORT}"]
