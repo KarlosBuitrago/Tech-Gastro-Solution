@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 public class GeneralSettingsDTO {
-    private String id;
+    private Long id;
     private String nameRestaurant;
     private String footerPrinting;
     private String logo;

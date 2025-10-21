@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class GeneralSettings {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     @Column(name = "name_restaurant", nullable = false)
     private String nameRestaurant;
     @Column(name = "footer_printing", nullable = false)
@@ -32,4 +32,12 @@ public class GeneralSettings {
     private String enableActivityLogs;
     @Column(name = "enable_background_data", nullable = false)
     private String enableBackgroundData;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
